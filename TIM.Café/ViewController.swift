@@ -12,14 +12,20 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
+        let uneMachineÀCafé = MachineÀCafé()
+        do {
+            for _ in 0...9 {
+                try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .cappuccino ,crème: 1, sucre: 0, extraFort: true)
+            } // for
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+        } catch
+        {
+            print("Erreur:  Problème avec la machine à café!: error = \(error)")
+        }
 
-
-}
+    print(uneMachineÀCafé.obtenirInventaire().vente)
+        
+    } // viewDidLoad
+ 
+} // ViewController
 
