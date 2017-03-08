@@ -13,7 +13,7 @@ class Application {
     let uneMachineÀCafé = MachineÀCafé()
     
     init() {
-        print("Ceci est le constructeur de la classe Application")
+        print("### Je suis le constructeur de la classe Application ###")
     }
     
     func menu() -> String {
@@ -27,7 +27,7 @@ class Application {
         texteMenu     += "\n│ 5.Mocha                         │"
         texteMenu     += "\n│                                 │"
         texteMenu     += "\n│ 8.Inventaire de la machine      │"
-        texteMenu     += "\n│ 9.Quitter                       │"
+        texteMenu     += "\n│ 9.\(red)Quitter\(black)                       │"
         texteMenu     += "\n└─────────────────────────────────┘"
         
         print(texteMenu + "\nVotre choix?")

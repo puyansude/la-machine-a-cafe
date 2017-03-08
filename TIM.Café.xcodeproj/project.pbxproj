@@ -16,6 +16,9 @@
 		B54F523B1E6DE1EA00283027 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54F52391E6DE1EA00283027 /* LaunchScreen.storyboard */; };
 		B54F52431E6DE27100283027 /* MachineACafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F52421E6DE27100283027 /* MachineACafe.swift */; };
 		B560B3871E6F94B900F19611 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = B560B3851E6F91D200F19611 /* Application.swift */; };
+		B5D960861E70C554007BE9A8 /* Outils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D960851E70C554007BE9A8 /* Outils.swift */; };
+		B5D960871E70C554007BE9A8 /* Outils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D960851E70C554007BE9A8 /* Outils.swift */; };
+		B5D960881E70C554007BE9A8 /* Outils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D960851E70C554007BE9A8 /* Outils.swift */; };
 		B5E712ED1E70A4A20056DAE8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E712EC1E70A4A20056DAE8 /* main.swift */; };
 		B5E712F11E70A4FD0056DAE8 /* MachineACafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F52421E6DE27100283027 /* MachineACafe.swift */; };
 /* End PBXBuildFile section */
@@ -63,6 +66,7 @@
 		B54F523C1E6DE1EA00283027 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B54F52421E6DE27100283027 /* MachineACafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineACafe.swift; sourceTree = "<group>"; };
 		B560B3851E6F91D200F19611 /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Application.swift; path = "Console.TIM.Café/Application.swift"; sourceTree = SOURCE_ROOT; };
+		B5D960851E70C554007BE9A8 /* Outils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outils.swift; sourceTree = "<group>"; };
 		B5E712EA1E70A4A20056DAE8 /* Console.TIM.Café.minimaliste */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Console.TIM.Café.minimaliste"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E712EC1E70A4A20056DAE8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = main.swift; path = "../Console.TIM.Café.minimaliste/main.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,6 +143,7 @@
 		B5D9604A1E70ADBB007BE9A8 /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				B5D960851E70C554007BE9A8 /* Outils.swift */,
 			);
 			name = Ressources;
 			sourceTree = "<group>";
@@ -273,6 +278,7 @@
 				B560B3871E6F94B900F19611 /* Application.swift in Sources */,
 				B53E31FB1E6F7E630073C0DA /* MachineACafe.swift in Sources */,
 				B53E31F71E6F7E090073C0DA /* main.swift in Sources */,
+				B5D960871E70C554007BE9A8 /* Outils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +289,7 @@
 				B54F52331E6DE1EA00283027 /* ViewController.swift in Sources */,
 				B54F52431E6DE27100283027 /* MachineACafe.swift in Sources */,
 				B54F52311E6DE1EA00283027 /* AppDelegate.swift in Sources */,
+				B5D960861E70C554007BE9A8 /* Outils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5E712F11E70A4FD0056DAE8 /* MachineACafe.swift in Sources */,
+				B5D960881E70C554007BE9A8 /* Outils.swift in Sources */,
 				B5E712ED1E70A4A20056DAE8 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
