@@ -53,7 +53,7 @@ class MachineÀCafé {
          quantSucre:Int,
          quantCrème:Int,
          coutDuCafé:Float){
-        print("\n### Je suis le constructeur de la classe: 'MachineÀCafé' ###\n")
+        print(ANSIColors.green.rawValue, "### Je suis le constructeur de la classe 'MachineÀCafé' ###\n", ANSIColors.black.rawValue)
         self.inventaireCafé     = quantCafé
         self.inventaireCrème    = quantCrème
         self.inventaireGoblet   = quantGloblet
@@ -71,7 +71,7 @@ class MachineÀCafé {
 
     // Le destructeur
     deinit {
-        print("\n*** Je suis le destructeur de la classe: 'MachineÀCafé' ***")
+        print(ANSIColors.red.rawValue,"\n*** Je suis le destructeur de la classe: 'MachineÀCafé' ***", ANSIColors.black.rawValue)
         print("\t--> La machine à café a fait des ventes de \(ventesTotales) $")
     } // deinit
 
