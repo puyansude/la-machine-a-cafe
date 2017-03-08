@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Console.TIM.Café.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Console.TIM.Café.minimaliste.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>Console.TIM.Café.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +33,11 @@
 			<true/>
 		</dict>
 		<key>B54F522C1E6DE1EA00283027</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B5E712E91E70A4A20056DAE8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

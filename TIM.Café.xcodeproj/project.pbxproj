@@ -16,10 +16,21 @@
 		B54F523B1E6DE1EA00283027 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54F52391E6DE1EA00283027 /* LaunchScreen.storyboard */; };
 		B54F52431E6DE27100283027 /* MachineACafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F52421E6DE27100283027 /* MachineACafe.swift */; };
 		B560B3871E6F94B900F19611 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = B560B3851E6F91D200F19611 /* Application.swift */; };
+		B5E712ED1E70A4A20056DAE8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E712EC1E70A4A20056DAE8 /* main.swift */; };
+		B5E712F11E70A4FD0056DAE8 /* MachineACafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F52421E6DE27100283027 /* MachineACafe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		B53E31F21E6F7E090073C0DA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		B5E712E81E70A4A20056DAE8 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -42,6 +53,8 @@
 		B54F523C1E6DE1EA00283027 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B54F52421E6DE27100283027 /* MachineACafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineACafe.swift; sourceTree = "<group>"; };
 		B560B3851E6F91D200F19611 /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Application.swift; path = "Console.TIM.Café/Application.swift"; sourceTree = SOURCE_ROOT; };
+		B5E712EA1E70A4A20056DAE8 /* Console.TIM.Café.minimaliste */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Console.TIM.Café.minimaliste"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5E712EC1E70A4A20056DAE8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = main.swift; path = "../Console.TIM.Café.minimaliste/main.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +66,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B54F522A1E6DE1EA00283027 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5E712E71E70A4A20056DAE8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -76,6 +96,7 @@
 			children = (
 				B54F522F1E6DE1EA00283027 /* TIM.Café */,
 				B53E31F51E6F7E090073C0DA /* Console.TIM.Café */,
+				B5E712EB1E70A4A20056DAE8 /* Console.TIM.Café.minimaliste */,
 				B54F522E1E6DE1EA00283027 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,6 +106,7 @@
 			children = (
 				B54F522D1E6DE1EA00283027 /* TIM.Café.app */,
 				B53E31F41E6F7E090073C0DA /* Console.TIM.Café */,
+				B5E712EA1E70A4A20056DAE8 /* Console.TIM.Café.minimaliste */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,6 +123,14 @@
 				B54F52421E6DE27100283027 /* MachineACafe.swift */,
 			);
 			path = "TIM.Café";
+			sourceTree = "<group>";
+		};
+		B5E712EB1E70A4A20056DAE8 /* Console.TIM.Café.minimaliste */ = {
+			isa = PBXGroup;
+			children = (
+				B5E712EC1E70A4A20056DAE8 /* main.swift */,
+			);
+			path = "Console.TIM.Café.minimaliste";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +170,23 @@
 			productReference = B54F522D1E6DE1EA00283027 /* TIM.Café.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B5E712E91E70A4A20056DAE8 /* Console.TIM.Café.minimaliste */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5E712F01E70A4A20056DAE8 /* Build configuration list for PBXNativeTarget "Console.TIM.Café.minimaliste" */;
+			buildPhases = (
+				B5E712E61E70A4A20056DAE8 /* Sources */,
+				B5E712E71E70A4A20056DAE8 /* Frameworks */,
+				B5E712E81E70A4A20056DAE8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Console.TIM.Café.minimaliste";
+			productName = "Console.TIM.Café.minimaliste";
+			productReference = B5E712EA1E70A4A20056DAE8 /* Console.TIM.Café.minimaliste */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -155,6 +202,11 @@
 						ProvisioningStyle = Automatic;
 					};
 					B54F522C1E6DE1EA00283027 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 9HTRQ9H84K;
+						ProvisioningStyle = Automatic;
+					};
+					B5E712E91E70A4A20056DAE8 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 9HTRQ9H84K;
 						ProvisioningStyle = Automatic;
@@ -176,6 +228,7 @@
 			targets = (
 				B54F522C1E6DE1EA00283027 /* TIM.Café */,
 				B53E31F31E6F7E090073C0DA /* Console.TIM.Café */,
+				B5E712E91E70A4A20056DAE8 /* Console.TIM.Café.minimaliste */,
 			);
 		};
 /* End PBXProject section */
@@ -211,6 +264,15 @@
 				B54F52331E6DE1EA00283027 /* ViewController.swift in Sources */,
 				B54F52431E6DE27100283027 /* MachineACafe.swift in Sources */,
 				B54F52311E6DE1EA00283027 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5E712E61E70A4A20056DAE8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5E712F11E70A4FD0056DAE8 /* MachineACafe.swift in Sources */,
+				B5E712ED1E70A4A20056DAE8 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +439,30 @@
 			};
 			name = Release;
 		};
+		B5E712EE1E70A4A20056DAE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				DEVELOPMENT_TEAM = 9HTRQ9H84K;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		B5E712EF1E70A4A20056DAE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				DEVELOPMENT_TEAM = 9HTRQ9H84K;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -406,6 +492,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		B5E712F01E70A4A20056DAE8 /* Build configuration list for PBXNativeTarget "Console.TIM.Café.minimaliste" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5E712EE1E70A4A20056DAE8 /* Debug */,
+				B5E712EF1E70A4A20056DAE8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

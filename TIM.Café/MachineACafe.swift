@@ -34,7 +34,7 @@ protocol MachineÀCaféDelegate {
 }
 
 //
-class MachineÀCafé  {
+class MachineÀCafé {
     var inventaireCafé:Int
     var inventaireGoblet:Int
     var inventaireSucre:Int
@@ -71,7 +71,12 @@ class MachineÀCafé  {
         print("La machine à café a fait des ventes de \(ventesTotales)")
     }
 
-    // Les méthodes de la classe
+    // Les méthodes de classe
+    static func quiSuisJe() -> String {
+        return "Je suis une machine à café virtuelle"
+    }
+    
+    // Les méthodes d'instance
     func fabriquerUnCafé(typeCafé:TypesCafé, crème:Int, sucre:Int, extraFort:Bool = false) throws{
     
         guard inventaireCafé > 0 else {
