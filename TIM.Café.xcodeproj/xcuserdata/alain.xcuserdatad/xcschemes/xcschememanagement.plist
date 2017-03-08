@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Console.TIM.Café.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>TIM.Café.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>B53E31F31E6F7E090073C0DA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B54F522C1E6DE1EA00283027</key>
 		<dict>
 			<key>primary</key>

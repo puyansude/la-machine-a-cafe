@@ -49,10 +49,10 @@ class MachineÀCafé  {
     } // init
     
     convenience init() {
-        self.init(quantCafé:    10,
-                  quantGloblet: 10,
-                  quantSucre:   10,
-                  quantCrème:   10,
+        self.init(quantCafé:    5,
+                  quantGloblet: 4,
+                  quantSucre:   6,
+                  quantCrème:   6,
                   coutDuCafé:   1.99)
     }  // convenience init()
 
@@ -66,12 +66,18 @@ class MachineÀCafé  {
             throw ErreursDeLaMachineÀCafé.plusDeCafé
         }
 
+        guard inventaireGoblet > 0 else {
+            throw ErreursDeLaMachineÀCafé.plusDeGoblet
+        }
+
         // un nombre entre 0 et 9
         guard arc4random_uniform(10) < 9 else {
            throw ErreursDeLaMachineÀCafé.plusAccèsÀUneSourceDEau
         }
         
         inventaireCafé -= 1
+        inventaireGoblet -= 1
+        
         ventesTotales += coutDuCafé
         print("Un café \(typeCafé) est servi")
         

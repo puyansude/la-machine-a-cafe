@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B53E31F71E6F7E090073C0DA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E31F61E6F7E090073C0DA /* main.swift */; };
+		B53E31FB1E6F7E630073C0DA /* MachineACafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F52421E6DE27100283027 /* MachineACafe.swift */; };
 		B54F52311E6DE1EA00283027 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F52301E6DE1EA00283027 /* AppDelegate.swift */; };
 		B54F52331E6DE1EA00283027 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F52321E6DE1EA00283027 /* ViewController.swift */; };
 		B54F52361E6DE1EA00283027 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54F52341E6DE1EA00283027 /* Main.storyboard */; };
@@ -15,7 +17,21 @@
 		B54F52431E6DE27100283027 /* MachineACafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F52421E6DE27100283027 /* MachineACafe.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B53E31F21E6F7E090073C0DA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		B53E31F41E6F7E090073C0DA /* Console.TIM.Café */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Console.TIM.Café"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B53E31F61E6F7E090073C0DA /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = main.swift; path = "../Console.TIM.Café/main.swift"; sourceTree = "<group>"; };
 		B54F522D1E6DE1EA00283027 /* TIM.Café.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TIM.Café.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54F52301E6DE1EA00283027 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B54F52321E6DE1EA00283027 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -27,6 +43,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B53E31F11E6F7E090073C0DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B54F522A1E6DE1EA00283027 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -37,10 +60,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B53E31F51E6F7E090073C0DA /* Console.TIM.Café */ = {
+			isa = PBXGroup;
+			children = (
+				B53E31F61E6F7E090073C0DA /* main.swift */,
+			);
+			path = "Console.TIM.Café";
+			sourceTree = "<group>";
+		};
 		B54F52241E6DE1EA00283027 = {
 			isa = PBXGroup;
 			children = (
 				B54F522F1E6DE1EA00283027 /* TIM.Café */,
+				B53E31F51E6F7E090073C0DA /* Console.TIM.Café */,
 				B54F522E1E6DE1EA00283027 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				B54F522D1E6DE1EA00283027 /* TIM.Café.app */,
+				B53E31F41E6F7E090073C0DA /* Console.TIM.Café */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +103,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B53E31F31E6F7E090073C0DA /* Console.TIM.Café */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B53E31FA1E6F7E090073C0DA /* Build configuration list for PBXNativeTarget "Console.TIM.Café" */;
+			buildPhases = (
+				B53E31F01E6F7E090073C0DA /* Sources */,
+				B53E31F11E6F7E090073C0DA /* Frameworks */,
+				B53E31F21E6F7E090073C0DA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Console.TIM.Café";
+			productName = "Console.TIM.Café";
+			productReference = B53E31F41E6F7E090073C0DA /* Console.TIM.Café */;
+			productType = "com.apple.product-type.tool";
+		};
 		B54F522C1E6DE1EA00283027 /* TIM.Café */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B54F523F1E6DE1EA00283027 /* Build configuration list for PBXNativeTarget "TIM.Café" */;
@@ -97,6 +147,10 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Alain;
 				TargetAttributes = {
+					B53E31F31E6F7E090073C0DA = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
 					B54F522C1E6DE1EA00283027 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 9HTRQ9H84K;
@@ -118,6 +172,7 @@
 			projectRoot = "";
 			targets = (
 				B54F522C1E6DE1EA00283027 /* TIM.Café */,
+				B53E31F31E6F7E090073C0DA /* Console.TIM.Café */,
 			);
 		};
 /* End PBXProject section */
@@ -136,6 +191,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B53E31F01E6F7E090073C0DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B53E31FB1E6F7E630073C0DA /* MachineACafe.swift in Sources */,
+				B53E31F71E6F7E090073C0DA /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B54F52291E6DE1EA00283027 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -168,6 +232,28 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B53E31F81E6F7E090073C0DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		B53E31F91E6F7E090073C0DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		B54F523D1E6DE1EA00283027 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -290,6 +376,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B53E31FA1E6F7E090073C0DA /* Build configuration list for PBXNativeTarget "Console.TIM.Café" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B53E31F81E6F7E090073C0DA /* Debug */,
+				B53E31F91E6F7E090073C0DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		B54F52281E6DE1EA00283027 /* Build configuration list for PBXProject "TIM.Café" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -306,6 +400,7 @@
 				B54F52411E6DE1EA00283027 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
