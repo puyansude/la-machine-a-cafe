@@ -8,5 +8,14 @@
 
 import Foundation
 
-print("Hello, World!")
+print(MachineÀCafé.quiSuisJe())
 
+// Démarrer la machine à café
+var uneMachineÀCafé:MachineÀCafé? = MachineÀCafé()
+
+// Fabriquer du bon café!
+try? uneMachineÀCafé!.fabriquerUnCafé(typeCafé: .latte, crème: 1, sucre: 2)
+try? uneMachineÀCafé!.fabriquerUnCafé(typeCafé: .espresso, crème: 0, sucre: 1)
+
+print (uneMachineÀCafé!.texteInventaire())
+uneMachineÀCafé = nil

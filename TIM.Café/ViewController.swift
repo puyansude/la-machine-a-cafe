@@ -8,10 +8,12 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("yo")
         let uneMachineÀCafé = MachineÀCafé()
         do {
             for _ in 0...9 {

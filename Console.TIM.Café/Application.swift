@@ -17,35 +17,25 @@ class Application {
     }
     
     func menu() -> String {
-        print("\n\nBienvenue à la machine à café")
-        print("-----------------------------")
-        print("1.Café noir")
-        print("2.Espresso Double")
-        print("3.Cappuccino")
-        print("4.Latte")
-        print("5.Mocha")
-        print("\n8.Inventaire de la machine")
-        print("9.Quitter")
-        print("-----------------------------")
-        print("Votre choix?")
+        var texteMenu  = "\n┌─────────────────────────────────┐"
+        texteMenu     += "\n│  Bienvenue à la machine à café  │"
+        texteMenu     += "\n╞═════════════════════════════════╡"
+        texteMenu     += "\n│ 1.Café noir                     │"
+        texteMenu     += "\n│ 2.Espresso Double               │"
+        texteMenu     += "\n│ 3.Cappuccino                    │"
+        texteMenu     += "\n│ 4.Latte                         │"
+        texteMenu     += "\n│ 5.Mocha                         │"
+        texteMenu     += "\n│                                 │"
+        texteMenu     += "\n│ 8.Inventaire de la machine      │"
+        texteMenu     += "\n│ 9.Quitter                       │"
+        texteMenu     += "\n└─────────────────────────────────┘"
+        
+        print(texteMenu + "\nVotre choix?")
         let response = readLine()!
         print("response = \(response)")
         return response
     }
     
-    func FormaterInventaire() -> String{
-        
-        let inventaire = uneMachineÀCafé.obtenirInventaire()
-        
-        var texteInventaire = "\n\nInventaire de la machine à café:"
-        texteInventaire += "\n\tCafé: \(inventaire.café)"
-        texteInventaire += "\n\tGoblet: \(inventaire.goblet)"
-        texteInventaire += "\n\tSucre: \(inventaire.sucre)"
-        texteInventaire += "\n\tCrème: \(inventaire.crème)"
-        texteInventaire += "\n\tVente: \(String(format: "%2.2f $" , inventaire.vente))"
-        
-        return texteInventaire
-    } // FormaterInventaire
     
     func loop() {
         var choix = ""
@@ -56,7 +46,7 @@ class Application {
                 case "1":
                     try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .espresso, crème: 0, sucre: 2)
                     
-                case "8": print(FormaterInventaire())
+                case "8": print(uneMachineÀCafé.texteInventaire())
                 default: break
                 }
             } catch

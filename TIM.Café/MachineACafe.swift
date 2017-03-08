@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 // Énumération des types de café
 enum TypesCafé:String {
     case espresso
@@ -44,6 +45,7 @@ class MachineÀCafé {
     var ventesTotales:Float = 0.0
     let coutDuCafé:Float
     var delegate:MachineÀCaféDelegate?
+
     // Le constructeur
     init(
          quantCafé:Int,
@@ -51,6 +53,7 @@ class MachineÀCafé {
          quantSucre:Int,
          quantCrème:Int,
          coutDuCafé:Float){
+        print("\n### Je suis le constructeur de la classe: 'MachineÀCafé' ###\n")
         self.inventaireCafé     = quantCafé
         self.inventaireCrème    = quantCrème
         self.inventaireGoblet   = quantGloblet
@@ -63,13 +66,14 @@ class MachineÀCafé {
                   quantGloblet: 4,
                   quantSucre:   6,
                   quantCrème:   6,
-                  coutDuCafé:   1.99)
+                  coutDuCafé:   2.25)
     }  // convenience init()
 
     // Le destructeur
     deinit {
-        print("La machine à café a fait des ventes de \(ventesTotales)")
-    }
+        print("\n*** Je suis le destructeur de la classe: 'MachineÀCafé' ***")
+        print("\t--> La machine à café a fait des ventes de \(ventesTotales) $")
+    } // deinit
 
     // Les méthodes de classe
     static func quiSuisJe() -> String {
@@ -90,6 +94,7 @@ class MachineÀCafé {
         // un nombre entre 0 et 9
         if arc4random_uniform(10) >= 9 {
             delegate?.plusAccesADeLeau(sender:self)
+            return
            // throw ErreursDeLaMachineÀCafé.plusAccèsÀUneSourceDEau
         }
         
@@ -97,7 +102,7 @@ class MachineÀCafé {
         inventaireGoblet -= 1
         
         ventesTotales += coutDuCafé
-        print("Un café \(typeCafé) est servi")
+        print("---> Un café \(typeCafé) est servi...")
         
     } // fabriquerUnCafé
     
@@ -108,4 +113,22 @@ class MachineÀCafé {
             inventaireCrème,
             ventesTotales)
     }
+    
+    func texteInventaire() -> String{
+        
+        let inventaire = self.obtenirInventaire()
+        // http://www.duxburysystems.com/documentation/dbt11.1/miscellaneous/Special_Characters/Unicode_25xx.htm
+        var texteInventaire = "\n┌─────────────────────────────────┐"
+        texteInventaire    += "\n│ Inventaire de la machine à café │"
+        texteInventaire    += "\n└─────────────────────────────────┘"
+        texteInventaire    += "\n\tCafé: \t\(inventaire.café)"
+        texteInventaire    += "\n\tGoblet:\t\(inventaire.goblet)"
+        texteInventaire    += "\n\tSucre:\t\(inventaire.sucre)"
+        texteInventaire    += "\n\tCrème:\t\(inventaire.crème)"
+        texteInventaire    += "\n\tVente:\t\(String(format: "%2.2f $" , inventaire.vente))"
+        texteInventaire    += "\n ═════════════════════════════════"
+        
+        return texteInventaire
+    } // FormaterInventaire
+
 } // MachineÀCafé
