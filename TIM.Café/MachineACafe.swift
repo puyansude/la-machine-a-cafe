@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Énumération des types de café
 enum TypesCafé:String {
     case espresso
     case latte
@@ -16,6 +17,7 @@ enum TypesCafé:String {
     case mocha
 }
 
+// Énumération des erreurs de la machine à café
 enum ErreursDeLaMachineÀCafé: Error {
     case plusDeCafé
     case plusDeGoblet
@@ -25,6 +27,13 @@ enum ErreursDeLaMachineÀCafé: Error {
     case plusAccèsÀUneSourceDEau
 }
 
+/* @objc */
+protocol MachineÀCaféDelegate {
+     /* @objc optional */
+    func plusAccesADeLeau(sender:MachineÀCafé)
+}
+
+//
 class MachineÀCafé  {
     var inventaireCafé:Int
     var inventaireGoblet:Int
@@ -34,7 +43,8 @@ class MachineÀCafé  {
     var changeDisponible    = 5
     var ventesTotales:Float = 0.0
     let coutDuCafé:Float
-    
+    var delegate:MachineÀCaféDelegate?
+    // Le constructeur
     init(
          quantCafé:Int,
          quantGloblet:Int,
@@ -56,10 +66,12 @@ class MachineÀCafé  {
                   coutDuCafé:   1.99)
     }  // convenience init()
 
+    // Le destructeur
     deinit {
         print("La machine à café a fait des ventes de \(ventesTotales)")
     }
 
+    // Les méthodes de la classe
     func fabriquerUnCafé(typeCafé:TypesCafé, crème:Int, sucre:Int, extraFort:Bool = false) throws{
     
         guard inventaireCafé > 0 else {
@@ -71,8 +83,9 @@ class MachineÀCafé  {
         }
 
         // un nombre entre 0 et 9
-        guard arc4random_uniform(10) < 9 else {
-           throw ErreursDeLaMachineÀCafé.plusAccèsÀUneSourceDEau
+        if arc4random_uniform(10) >= 9 {
+            delegate?.plusAccesADeLeau(sender:self)
+           // throw ErreursDeLaMachineÀCafé.plusAccèsÀUneSourceDEau
         }
         
         inventaireCafé -= 1
