@@ -8,6 +8,10 @@
 
 import Foundation
 
+Boite.entete("yo man!")
+Boite.afficher("yo ", "man!")
+Boite.afficher("Coucou", couleur: "rouge", gras: true )
+
 print(MachineÀCafé.quiSuisJe())
 
 // Démarrer la machine à café

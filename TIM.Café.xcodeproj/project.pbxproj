@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B52F675A1E71B073008954E0 /* Boite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F67591E71B073008954E0 /* Boite.swift */; };
+		B52F675B1E71B073008954E0 /* Boite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F67591E71B073008954E0 /* Boite.swift */; };
+		B52F675C1E71B073008954E0 /* Boite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F67591E71B073008954E0 /* Boite.swift */; };
 		B53E31F71E6F7E090073C0DA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E31F61E6F7E090073C0DA /* main.swift */; };
 		B53E31FB1E6F7E630073C0DA /* MachineACafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F52421E6DE27100283027 /* MachineACafe.swift */; };
 		B54F52311E6DE1EA00283027 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F52301E6DE1EA00283027 /* AppDelegate.swift */; };
@@ -55,6 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B52F67591E71B073008954E0 /* Boite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boite.swift; sourceTree = "<group>"; };
 		B53E31F41E6F7E090073C0DA /* Console.TIM.Café */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Console.TIM.Café"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53E31F61E6F7E090073C0DA /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = main.swift; path = "../Console.TIM.Café/main.swift"; sourceTree = "<group>"; };
 		B54F522D1E6DE1EA00283027 /* TIM.Café.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TIM.Café.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				B5D960851E70C554007BE9A8 /* Outils.swift */,
+				B52F67591E71B073008954E0 /* Boite.swift */,
 			);
 			name = Ressources;
 			sourceTree = "<group>";
@@ -276,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B560B3871E6F94B900F19611 /* Application.swift in Sources */,
+				B52F675B1E71B073008954E0 /* Boite.swift in Sources */,
 				B53E31FB1E6F7E630073C0DA /* MachineACafe.swift in Sources */,
 				B53E31F71E6F7E090073C0DA /* main.swift in Sources */,
 				B5D960871E70C554007BE9A8 /* Outils.swift in Sources */,
@@ -287,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B54F52331E6DE1EA00283027 /* ViewController.swift in Sources */,
+				B52F675A1E71B073008954E0 /* Boite.swift in Sources */,
 				B54F52431E6DE27100283027 /* MachineACafe.swift in Sources */,
 				B54F52311E6DE1EA00283027 /* AppDelegate.swift in Sources */,
 				B5D960861E70C554007BE9A8 /* Outils.swift in Sources */,
@@ -298,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5E712F11E70A4FD0056DAE8 /* MachineACafe.swift in Sources */,
+				B52F675C1E71B073008954E0 /* Boite.swift in Sources */,
 				B5D960881E70C554007BE9A8 /* Outils.swift in Sources */,
 				B5E712ED1E70A4A20056DAE8 /* main.swift in Sources */,
 			);
