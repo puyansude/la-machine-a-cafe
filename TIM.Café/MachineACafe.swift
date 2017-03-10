@@ -8,6 +8,26 @@
 
 import Foundation
 
+struct RecettesCafé : OptionSet {
+    let rawValue: Int
+    // Ingrédients
+    static let café        = RecettesCafé(rawValue: 1 << 0) // 00000001  1
+    static let crème       = RecettesCafé(rawValue: 1 << 1) // 00000010  2
+    static let doubleCrème = RecettesCafé(rawValue: 1 << 2) // 00000101  4
+    static let sucre       = RecettesCafé(rawValue: 1 << 3) // 00001000  8
+    static let doubleSucre = RecettesCafé(rawValue: 1 << 4) // 00010000  16
+    static let doubleCafé  = RecettesCafé(rawValue: 1 << 5) // 00100000  32
+    static let cannelle    = RecettesCafé(rawValue: 1 << 6) // 01000000  64
+    
+    // Recettes
+    static let caféBase:RecettesCafé = [.café, .sucre, .crème]
+    static let espresso:RecettesCafé = [.doubleCafé]
+    static let cappuccino:RecettesCafé = [.doubleCafé, .doubleCrème, .cannelle]
+    static let latte:RecettesCafé = [.café, .doubleCrème]
+    static let ristretto:RecettesCafé = [.doubleCafé, .doubleSucre]
+    static let mocha:RecettesCafé = [.café, .doubleCrème, .doubleSucre]
+}
+
 
 // Énumération des types de café
 enum TypesCafé:String {
