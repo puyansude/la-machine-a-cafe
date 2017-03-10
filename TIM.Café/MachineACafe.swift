@@ -15,7 +15,8 @@
 //  do/try/catch/error, try?, guard, break
 //  protocol, delegate, CustomStringConvertible,
 //  lazy, n-tuplet, fonction variadique, 
-//  paramètre par défaut
+//  paramètre par défaut, 
+//  passer une fonction en paramètre, ...
 //  -----------------------------------------------------
 
 
@@ -32,14 +33,18 @@ struct RecettesCafé : OptionSet {
     static let doubleCafé  = RecettesCafé(rawValue: 1 << 5) // 00100000  32
     static let cannelle    = RecettesCafé(rawValue: 1 << 6) // 01000000  64
     static let vanille     = RecettesCafé(rawValue: 1 << 7) // 10000000  128
+    // Accessoires de la machine à café
+    static let goblet      = RecettesCafé(rawValue: 1 << 8) // 100000000  256
+    static let couvercle   = RecettesCafé(rawValue: 1 << 9) // 100000000  256
+    static let change      = RecettesCafé(rawValue: 1 << 10)
     
     // Recettes
-    static let caféMaison:RecettesCafé = [.café, .sucre, .crème]
-    static let espresso:RecettesCafé = [.café]
-    static let cappuccino:RecettesCafé = [.doubleCafé, .doubleCrème, .cannelle]
-    static let latte:RecettesCafé = [.café, .doubleCrème]
-    static let affogato:RecettesCafé = [.doubleCafé, .sucre, .doubleCrème, .vanille]
-    static let mocha:RecettesCafé = [.café, .doubleCrème, .doubleSucre]
+    static let caféMaison:RecettesCafé  = [.goblet, .couvercle, .café, .sucre, .crème]
+    static let espresso:RecettesCafé    = [.goblet, .café]
+    static let cappuccino:RecettesCafé  = [.goblet, .doubleCafé, .doubleCrème, .cannelle]
+    static let latte:RecettesCafé       = [.goblet, .café, .doubleCrème]
+    static let affogato:RecettesCafé    = [.goblet, .couvercle, .doubleCafé, .sucre, .doubleCrème, .vanille]
+    static let mocha:RecettesCafé       = [goblet, café, doubleCrème, doubleSucre] // valide sans le . mais pas d'aide de Xcode pour proposer des choix possibles.
 }
 
 // Énumération des types de café
@@ -70,12 +75,17 @@ protocol MachineÀCaféDelegate {
 
 //
 final class MachineÀCafé {
-    var inventaireCafé:Int
-    var inventaireGoblet:Int
-    var inventaireSucre:Int
-    var inventaireCrème:Int
-    var inventaireCannelle:Int
-    var inventaireVanille:Int
+
+    var inventaireMachineCafé:Dictionary<Int, Int> = [
+        RecettesCafé.café.rawValue:0,
+        RecettesCafé.sucre.rawValue:0,
+        RecettesCafé.crème.rawValue:0,
+        RecettesCafé.cannelle.rawValue:0,
+        RecettesCafé.vanille.rawValue:0,
+        RecettesCafé.goblet.rawValue:0,
+        RecettesCafé.couvercle.rawValue:0,
+        RecettesCafé.change.rawValue:0
+    ]
     
     var accèsÀUneSourceDEau = true
     var changeDisponible    = 5
@@ -83,7 +93,8 @@ final class MachineÀCafé {
     let coutDuCafé:Float
     var delegate:MachineÀCaféDelegate?
 
-    lazy var numberFormatter = NumberFormatter() // lazy = créer l'instance seulement à la première utilisation
+    // lazy = créer l'instance seulement à la première utilisation
+    lazy var numberFormatter = NumberFormatter()
 
     // Le constructeur
     init(
@@ -95,16 +106,31 @@ final class MachineÀCafé {
          quantVanille:Int,
          coutDuCafé:Float){
         printCouleur("### Je suis le constructeur de la classe 'MachineÀCafé' ###\n", .green)
+        
+        inventaireMachineCafé[RecettesCafé.café.rawValue]! = quantCafé
+        inventaireMachineCafé[RecettesCafé.crème.rawValue]! = quantCrème
+        inventaireMachineCafé[RecettesCafé.sucre.rawValue]! = quantSucre
+        inventaireMachineCafé[RecettesCafé.cannelle.rawValue]! = quantCannelle
+        inventaireMachineCafé[RecettesCafé.vanille.rawValue]! = quantVanille
+        inventaireMachineCafé[RecettesCafé.goblet.rawValue]! = quantGloblet
+        inventaireMachineCafé[RecettesCafé.couvercle.rawValue]! = 10
+        inventaireMachineCafé[RecettesCafé.change.rawValue]! = 10
+
+        self.coutDuCafé         = coutDuCafé
+
+        /*
         self.inventaireCafé     = quantCafé
         self.inventaireCrème    = quantCrème
         self.inventaireGoblet   = quantGloblet
         self.inventaireSucre    = quantSucre
         self.inventaireCannelle = quantCannelle
         self.inventaireVanille  = quantVanille
-        self.coutDuCafé         = coutDuCafé
 
+         */
+        
     } // init
     
+    // Un constructeur de convenance pour le programmeur paresseux.
     convenience init() {
         self.init(quantCafé:    12,
                   quantGloblet: 12,
@@ -148,11 +174,11 @@ final class MachineÀCafé {
     
         MAJInventaire(café:unCafé)
         
-        guard inventaireCafé > 0 else {
+        guard inventaireMachineCafé[RecettesCafé.café.rawValue]! > 0 else {
             throw ErreursDeLaMachineÀCafé.plusDeCafé
         }
 
-        guard inventaireGoblet > 0 else {
+        guard inventaireMachineCafé[RecettesCafé.goblet.rawValue]! > 0 else {
             throw ErreursDeLaMachineÀCafé.plusDeGoblet
         }
 
@@ -163,16 +189,36 @@ final class MachineÀCafé {
            // throw ErreursDeLaMachineÀCafé.plusAccèsÀUneSourceDEau
         }
         
-        inventaireCafé -= 1
-        inventaireGoblet -= 1
+        inventaireMachineCafé[RecettesCafé.café.rawValue]!      -= 1
+        inventaireMachineCafé[RecettesCafé.goblet.rawValue]!    -= 1
         
         ventesTotales += coutDuCafé
-        
-        
         print("---> Un \(obtenirNomCafé(unCafé)) est servi...")
         
     } // fabriquerUnCafé
     
+    // Les méthodes de traitements de l'inventaire:
+    // ********************************************
+    func traiterInventaire( opération: ( _ :RecettesCafé, _ :Int) -> Bool, ingrédient:RecettesCafé, quantité:Int) -> Bool {
+        return opération(ingrédient, quantité)
+    } // traiterInventaire
+    
+    func ajouter( ingrédient :RecettesCafé, quantité :Int) -> Bool  {
+        print("Inventaire: ajouter")
+        return true
+    } // ajouter
+
+    func retirer( ingrédient :RecettesCafé, quantité :Int) -> Bool  {
+        print("Inventaire: retirer")
+        return true
+    }  // retirer
+
+    func disponibilité( ingrédient :RecettesCafé, quantité :Int) -> Bool  {
+        print("Inventaire: disponibilité")
+        return true
+    } // disponibilité
+    // ********************************************
+
     
     private func MAJInventaire(café:RecettesCafé)
     {
@@ -191,14 +237,17 @@ final class MachineÀCafé {
         if café.contains(.cannelle)     { totalCannelle += 1 }
         if café.contains(.vanille )     { totalVanille  += 1 }
         
-        print("totalCafé: \(totalCafé), totalSucre: \(totalSucre), totalCrème: \(totalCrème), totalCannelle: \(totalCannelle), totalVanille: \(totalVanille)")
+        print("Ingrédients requis pour fabriquer le café:\n -->totalCafé: \(totalCafé), totalSucre: \(totalSucre), totalCrème: \(totalCrème), totalCannelle: \(totalCannelle), totalVanille: \(totalVanille)")
+        
+        _ = traiterInventaire(opération: disponibilité, ingrédient: RecettesCafé.café, quantité: 1)
+        
     }
     
     func obtenirInventaire() -> (café:Int, goblet:Int, sucre:Int, crème:Int,vente:Float ){
-        return (inventaireCafé,
-            inventaireGoblet,
-            inventaireSucre,
-            inventaireCrème,
+        return (inventaireMachineCafé[RecettesCafé.café.rawValue]!,
+            inventaireMachineCafé[RecettesCafé.goblet.rawValue]!,
+            inventaireMachineCafé[RecettesCafé.sucre.rawValue]!,
+            inventaireMachineCafé[RecettesCafé.crème.rawValue]!,
             ventesTotales)
     }
     
