@@ -64,8 +64,8 @@ class MachineÀCafé {
     } // init
     
     convenience init() {
-        self.init(quantCafé:    5,
-                  quantGloblet: 4,
+        self.init(quantCafé:    12,
+                  quantGloblet: 12,
                   quantSucre:   6,
                   quantCrème:   6,
                   coutDuCafé:   2.25)

@@ -95,6 +95,9 @@
                                         <state key="normal" title="Acheter">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="acheterUnCafé:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ps4-w7-HN2"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.57510166952054798" colorSpace="calibratedRGB"/>

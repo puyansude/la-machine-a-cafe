@@ -9,25 +9,40 @@
 import UIKit
 
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("yo")
-        let uneMachineÀCafé = MachineÀCafé()
+class ViewController: UIViewController, MachineÀCaféDelegate {
+    
+    let uneMachineÀCafé = MachineÀCafé()
+    
+    @IBAction func acheterUnCafé(_ sender: Any) {
         do {
-            for _ in 0...9 {
-                try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .cappuccino ,crème: 1, sucre: 0, extraFort: true)
-            } // for
-
-        } catch
+            try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .cappuccino, crème: 2, sucre: 1)
+            print(uneMachineÀCafé.texteInventaire())
+        }catch
         {
             print("Erreur:  Problème avec la machine à café!: error = \(error)")
         }
-
-    print(uneMachineÀCafé.obtenirInventaire().vente)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        uneMachineÀCafé.delegate = self
+        /*
+         do {
+         for _ in 0...9 {
+         try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .cappuccino ,crème: 1, sucre: 0, extraFort: true)
+         } // for
+         
+         } catch
+         {
+         print("Erreur:  Problème avec la machine à café!: error = \(error)")
+         }
+         */
         
     } // viewDidLoad
- 
+    
+    func plusAccesADeLeau(sender: MachineÀCafé) {
+        print("Erreur: La machine à café n'a plus accès à de l'eau!")
+    } // plusAccesADeLeau
+    
 } // ViewController
 
