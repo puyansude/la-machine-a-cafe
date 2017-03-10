@@ -22,8 +22,18 @@
 
 import Foundation
 
-struct RecettesCafé : OptionSet {
+struct RecettesCafé : OptionSet, Hashable {
     let rawValue: Int
+
+    // Implémentation du protocole Hashable -> retourne un Int
+    // La variable 'hashValue' sera utilisée dans un contexte d'indice.
+    // Par exemple, au lieu de unTableau[RecettesCafé.crème.rawValue] il sera
+    // possible d'utiliser la forme unTableau[RecettesCafé.crème]
+    //
+    var hashValue: Int {
+        return self.rawValue
+    }
+
     // Ingrédients
     static let café        = RecettesCafé(rawValue: 1 << 0) // 00000001  1
     static let crème       = RecettesCafé(rawValue: 1 << 1) // 00000010  2
@@ -35,7 +45,7 @@ struct RecettesCafé : OptionSet {
     static let vanille     = RecettesCafé(rawValue: 1 << 7) // 10000000  128
     // Accessoires de la machine à café
     static let goblet      = RecettesCafé(rawValue: 1 << 8) // 100000000  256
-    static let couvercle   = RecettesCafé(rawValue: 1 << 9) // 100000000  256
+    static let couvercle   = RecettesCafé(rawValue: 1 << 9)
     static let change      = RecettesCafé(rawValue: 1 << 10)
     
     // Recettes
@@ -76,15 +86,15 @@ protocol MachineÀCaféDelegate {
 //
 final class MachineÀCafé {
 
-    var inventaireMachineCafé:Dictionary<Int, Int> = [
-        RecettesCafé.café.rawValue:0,
-        RecettesCafé.sucre.rawValue:0,
-        RecettesCafé.crème.rawValue:0,
-        RecettesCafé.cannelle.rawValue:0,
-        RecettesCafé.vanille.rawValue:0,
-        RecettesCafé.goblet.rawValue:0,
-        RecettesCafé.couvercle.rawValue:0,
-        RecettesCafé.change.rawValue:0
+    var inventaireMachineCafé:Dictionary<RecettesCafé, Int> = [
+        RecettesCafé.café:0,
+        RecettesCafé.sucre:0,
+        RecettesCafé.crème:0,
+        RecettesCafé.cannelle:0,
+        RecettesCafé.vanille:0,
+        RecettesCafé.goblet:0,
+        RecettesCafé.couvercle:0,
+        RecettesCafé.change:0
     ]
     
     var accèsÀUneSourceDEau = true
@@ -107,27 +117,18 @@ final class MachineÀCafé {
          coutDuCafé:Float){
         printCouleur("### Je suis le constructeur de la classe 'MachineÀCafé' ###\n", .green)
         
-        inventaireMachineCafé[RecettesCafé.café.rawValue]! = quantCafé
-        inventaireMachineCafé[RecettesCafé.crème.rawValue]! = quantCrème
-        inventaireMachineCafé[RecettesCafé.sucre.rawValue]! = quantSucre
-        inventaireMachineCafé[RecettesCafé.cannelle.rawValue]! = quantCannelle
-        inventaireMachineCafé[RecettesCafé.vanille.rawValue]! = quantVanille
-        inventaireMachineCafé[RecettesCafé.goblet.rawValue]! = quantGloblet
-        inventaireMachineCafé[RecettesCafé.couvercle.rawValue]! = 10
-        inventaireMachineCafé[RecettesCafé.change.rawValue]! = 10
+        // Il est possible d'indicer le dictionnaire avec RecettesCafé parce que RecettesCafé est conforme protocole 'Hashable'
+        inventaireMachineCafé[RecettesCafé.café]! = quantCafé
+        inventaireMachineCafé[RecettesCafé.crème]! = quantCrème
+        inventaireMachineCafé[RecettesCafé.sucre]! = quantSucre
+        inventaireMachineCafé[RecettesCafé.cannelle]! = quantCannelle
+        inventaireMachineCafé[RecettesCafé.vanille]! = quantVanille
+        inventaireMachineCafé[RecettesCafé.goblet]! = quantGloblet
+        inventaireMachineCafé[RecettesCafé.couvercle]! = 10
+        inventaireMachineCafé[RecettesCafé.change]! = 10
 
         self.coutDuCafé         = coutDuCafé
 
-        /*
-        self.inventaireCafé     = quantCafé
-        self.inventaireCrème    = quantCrème
-        self.inventaireGoblet   = quantGloblet
-        self.inventaireSucre    = quantSucre
-        self.inventaireCannelle = quantCannelle
-        self.inventaireVanille  = quantVanille
-
-         */
-        
     } // init
     
     // Un constructeur de convenance pour le programmeur paresseux.
@@ -170,15 +171,15 @@ final class MachineÀCafé {
     }
 
     
-    func fabriquerUnCafé(_ unCafé:RecettesCafé, crème:Int = 0, sucre:Int = 0, extraFort:Bool = false) throws{
+    func infuser(_ unCafé:RecettesCafé, crème:Int = 0, sucre:Int = 0, extraFort:Bool = false) throws{
     
         MAJInventaire(café:unCafé)
         
-        guard inventaireMachineCafé[RecettesCafé.café.rawValue]! > 0 else {
+        guard inventaireMachineCafé[RecettesCafé.café]! > 0 else {
             throw ErreursDeLaMachineÀCafé.plusDeCafé
         }
 
-        guard inventaireMachineCafé[RecettesCafé.goblet.rawValue]! > 0 else {
+        guard inventaireMachineCafé[RecettesCafé.goblet]! > 0 else {
             throw ErreursDeLaMachineÀCafé.plusDeGoblet
         }
 
@@ -189,8 +190,8 @@ final class MachineÀCafé {
            // throw ErreursDeLaMachineÀCafé.plusAccèsÀUneSourceDEau
         }
         
-        inventaireMachineCafé[RecettesCafé.café.rawValue]!      -= 1
-        inventaireMachineCafé[RecettesCafé.goblet.rawValue]!    -= 1
+        inventaireMachineCafé[RecettesCafé.café]!      -= 1
+        inventaireMachineCafé[RecettesCafé.goblet]!    -= 1
         
         ventesTotales += coutDuCafé
         print("---> Un \(obtenirNomCafé(unCafé)) est servi...")
@@ -244,10 +245,10 @@ final class MachineÀCafé {
     }
     
     func obtenirInventaire() -> (café:Int, goblet:Int, sucre:Int, crème:Int,vente:Float ){
-        return (inventaireMachineCafé[RecettesCafé.café.rawValue]!,
-            inventaireMachineCafé[RecettesCafé.goblet.rawValue]!,
-            inventaireMachineCafé[RecettesCafé.sucre.rawValue]!,
-            inventaireMachineCafé[RecettesCafé.crème.rawValue]!,
+        return (inventaireMachineCafé[RecettesCafé.café]!,
+            inventaireMachineCafé[RecettesCafé.goblet]!,
+            inventaireMachineCafé[RecettesCafé.sucre]!,
+            inventaireMachineCafé[RecettesCafé.crème]!,
             ventesTotales)
     }
     

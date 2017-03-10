@@ -14,9 +14,9 @@ print(MachineÀCafé.quiSuisJe())
 var uneMachineÀCafé:MachineÀCafé? = MachineÀCafé()
 
 // Fabriquer du bon café!
-try? uneMachineÀCafé!.fabriquerUnCafé(.latte, crème: 1, sucre: 2)
+try? uneMachineÀCafé!.infuser(.latte, crème: 1, sucre: 2)
 print("---------------------------------------------------------------------------------\n")
-try? uneMachineÀCafé!.fabriquerUnCafé(.espresso, crème: 0, sucre: 1)
+try? uneMachineÀCafé!.infuser(.espresso)
 print("---------------------------------------------------------------------------------\n")
 
 print (uneMachineÀCafé!)

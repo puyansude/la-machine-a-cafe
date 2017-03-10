@@ -43,12 +43,12 @@ class Application {
             do {
                 switch choix {
                 // TODO:  Remplacer par un tableau 'choixCafé = [.caféMaison, espresso, ...]'
-                case "1": try uneMachineÀCafé.fabriquerUnCafé(.caféMaison, sucre: 1)
-                case "2": try uneMachineÀCafé.fabriquerUnCafé(.espresso, crème: 1)
-                case "3": try uneMachineÀCafé.fabriquerUnCafé(.cappuccino)
-                case "4": try uneMachineÀCafé.fabriquerUnCafé(.latte)
-                case "5": try uneMachineÀCafé.fabriquerUnCafé(.mocha)
-                case "6": try uneMachineÀCafé.fabriquerUnCafé(.affogato)
+                case "1": try uneMachineÀCafé.infuser(.caféMaison, sucre: 1)
+                case "2": try uneMachineÀCafé.infuser(.espresso, crème: 1)
+                case "3": try uneMachineÀCafé.infuser(.cappuccino)
+                case "4": try uneMachineÀCafé.infuser(.latte)
+                case "5": try uneMachineÀCafé.infuser(.mocha)
+                case "6": try uneMachineÀCafé.infuser(.affogato)
                     
                 case "8": print(uneMachineÀCafé)
                 case "9": break  // Pour de pas obtenir le msg de default
