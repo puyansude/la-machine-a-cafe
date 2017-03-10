@@ -13,17 +13,18 @@ class Application {
     let uneMachineÀCafé = MachineÀCafé()
     
     init() {
-        print(ANSIColors.green.rawValue, "### Je suis le constructeur de la classe 'Application' ###", ANSIColors.black.rawValue)
+        printCouleur("### Je suis le constructeur de la classe 'Application' ###", .green)
     }
     
     func menu() -> String {
         
         Boite.entete("Bienvenue à la machine à café")
-        Boite.afficher(" 1.Café noir")
-        Boite.afficher(" 2.Espresso Double")
+        Boite.afficher(" 1.Café maison: 1 crème, 1 sucre")
+        Boite.afficher(" 2.Espresso")
         Boite.afficher(" 3.Cappuccino")
         Boite.afficher(" 4.Latte")
         Boite.afficher(" 5.Mocha")
+        Boite.afficher(" 6.Affogato")
         Boite.tracerLigne(position: .séparateur)
         Boite.afficher(" 8.Inventaire de la machine")
         Boite.afficher(" 9.Quitter")
@@ -35,35 +36,30 @@ class Application {
         return response
     }
     
-    
     func loop() {
         var choix = ""
         repeat  {
             choix = menu()
             do {
                 switch choix {
-                case "1":
-                    try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .café, crème: 0, sucre: 2)
-                case "2":
-                    try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .espresso, crème: 0, sucre: 0)
-                case "3":
-                    try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .cappuccino, crème: 0, sucre: 0)
-                case "4":
-                    try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .latte, crème: 0, sucre: 0)
-                case "5":
-                    try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .mocha, crème: 0, sucre: 0)
+                // TODO:  Remplacer par un tableau 'choixCafé = [.caféMaison, espresso, ...]'
+                case "1": try uneMachineÀCafé.fabriquerUnCafé(.caféMaison, sucre: 1)
+                case "2": try uneMachineÀCafé.fabriquerUnCafé(.espresso, crème: 1)
+                case "3": try uneMachineÀCafé.fabriquerUnCafé(.cappuccino)
+                case "4": try uneMachineÀCafé.fabriquerUnCafé(.latte)
+                case "5": try uneMachineÀCafé.fabriquerUnCafé(.mocha)
+                case "6": try uneMachineÀCafé.fabriquerUnCafé(.affogato)
                     
-                case "8": print(uneMachineÀCafé.texteInventaire())
+                case "8": print(uneMachineÀCafé)
+                case "9": break  // Pour de pas obtenir le msg de default
                     
-                case "9": break
-                    
-                default: print("Erreur: Choix invalide")
+                default: printCouleur("Erreur: Choix invalide", .red)
                 }
             } catch
             {
-                print("Erreur de la machine à café:", error)
-                break
-            }
+                printCouleur("Erreur de la machine à café: \(error)", .red)
+                break // Va sortir du 'while'
+            }	
             
         } while choix != "9"
         

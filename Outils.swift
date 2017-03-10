@@ -29,3 +29,7 @@ let black = "\u{001B}[0;30m"
 let red = "\u{001B}[1;31m"
 let green = "\u{001B}[0;32m"
 
+func printCouleur(_ texte:String, _ couleur:ANSIColors) {
+    print(couleur.rawValue, texte, ANSIColors.black.rawValue)
+
+}
