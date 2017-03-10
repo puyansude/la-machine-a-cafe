@@ -19,6 +19,7 @@
 		B54F523B1E6DE1EA00283027 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54F52391E6DE1EA00283027 /* LaunchScreen.storyboard */; };
 		B54F52431E6DE27100283027 /* MachineACafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F52421E6DE27100283027 /* MachineACafe.swift */; };
 		B560B3871E6F94B900F19611 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = B560B3851E6F91D200F19611 /* Application.swift */; };
+		B5D0D7821E723A2C00352704 /* café.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5D0D7811E723A2C00352704 /* café.jpg */; };
 		B5D960861E70C554007BE9A8 /* Outils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D960851E70C554007BE9A8 /* Outils.swift */; };
 		B5D960871E70C554007BE9A8 /* Outils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D960851E70C554007BE9A8 /* Outils.swift */; };
 		B5D960881E70C554007BE9A8 /* Outils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D960851E70C554007BE9A8 /* Outils.swift */; };
@@ -70,6 +71,7 @@
 		B54F523C1E6DE1EA00283027 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B54F52421E6DE27100283027 /* MachineACafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineACafe.swift; sourceTree = "<group>"; };
 		B560B3851E6F91D200F19611 /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Application.swift; path = "Console.TIM.Café/Application.swift"; sourceTree = SOURCE_ROOT; };
+		B5D0D7811E723A2C00352704 /* café.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "café.jpg"; sourceTree = "<group>"; };
 		B5D960851E70C554007BE9A8 /* Outils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outils.swift; sourceTree = "<group>"; };
 		B5E712EA1E70A4A20056DAE8 /* Console.TIM.Café.minimaliste */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Console.TIM.Café.minimaliste"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E712EC1E70A4A20056DAE8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = main.swift; path = "../Console.TIM.Café.minimaliste/main.swift"; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 		B5D9604A1E70ADBB007BE9A8 /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				B5D0D7811E723A2C00352704 /* café.jpg */,
 				B5D960851E70C554007BE9A8 /* Outils.swift */,
 				B52F67591E71B073008954E0 /* Boite.swift */,
 			);
@@ -269,6 +272,7 @@
 			files = (
 				B54F523B1E6DE1EA00283027 /* LaunchScreen.storyboard in Resources */,
 				B54F52381E6DE1EA00283027 /* Assets.xcassets in Resources */,
+				B5D0D7821E723A2C00352704 /* café.jpg in Resources */,
 				B54F52361E6DE1EA00283027 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,9 +8,15 @@
 
 import Foundation
 
-Boite.entete("yo man!")
-Boite.afficher("yo ", "man!")
-Boite.afficher("Coucou", couleur: "rouge", gras: true )
+Boite.entete("Je suis le titre")
+Boite.afficher(" yo ", "man!")
+Boite.afficher(" Coucou", couleur: "rouge", gras: true )
+
+Boite.tracerLigne(position: .séparateur)
+Boite.afficher(" 1.", "Option 1")
+Boite.afficher(" 2.", "Option 2")
+Boite.tracerLigne(position: .bas)
+
 
 print(MachineÀCafé.quiSuisJe())
 

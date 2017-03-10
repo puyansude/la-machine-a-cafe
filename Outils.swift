@@ -8,6 +8,12 @@
 
 import Foundation
 
+extension String {
+    func répéter(_ fois:Int) -> String {
+        return String(repeating: self, count: fois)
+    } // répéter
+} //
+
 enum ANSIColors: String {
     case black = "\u{001B}[0;30m"
     case red = "\u{001B}[1;31m"

@@ -17,21 +17,19 @@ class Application {
     }
     
     func menu() -> String {
-        var texteMenu  = "\n┌─────────────────────────────────┐"
-        texteMenu     += "\n│  Bienvenue à la machine à café  │"
-        texteMenu     += "\n╞═════════════════════════════════╡"
-        texteMenu     += "\n│ 1.Café noir                     │"
-        texteMenu     += "\n│ 2.Espresso Double               │"
-        texteMenu     += "\n│ 3.Cappuccino                    │"
-        texteMenu     += "\n│ 4.Latte                         │"
-        texteMenu     += "\n│ 5.Mocha                         │"
-        texteMenu     += "\n│                                 │"
-        texteMenu     += "\n│ 8.Inventaire de la machine      │"
-        //texteMenu     += "\n│ 9.\(red)Quitter\(black)
-        texteMenu     += "\n│ 9.Quitter                       │"
-        texteMenu     += "\n└─────────────────────────────────┘"
         
-        print(texteMenu + "\nVotre choix?")
+        Boite.entete("Bienvenue à la machine à café")
+        Boite.afficher(" 1.Café noir")
+        Boite.afficher(" 2.Espresso Double")
+        Boite.afficher(" 3.Cappuccino")
+        Boite.afficher(" 4.Latte")
+        Boite.afficher(" 5.Mocha")
+        Boite.tracerLigne(position: .séparateur)
+        Boite.afficher(" 8.Inventaire de la machine")
+        Boite.afficher(" 9.Quitter")
+        Boite.tracerLigne(position: .bas)
+        
+        print("Votre choix?")
         let response = readLine()!
         print("response = \(response)")
         return response
@@ -45,14 +43,25 @@ class Application {
             do {
                 switch choix {
                 case "1":
-                    try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .espresso, crème: 0, sucre: 2)
+                    try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .café, crème: 0, sucre: 2)
+                case "2":
+                    try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .espresso, crème: 0, sucre: 0)
+                case "3":
+                    try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .cappuccino, crème: 0, sucre: 0)
+                case "4":
+                    try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .latte, crème: 0, sucre: 0)
+                case "5":
+                    try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .mocha, crème: 0, sucre: 0)
                     
                 case "8": print(uneMachineÀCafé.texteInventaire())
-                default: break
+                    
+                case "9": break
+                    
+                default: print("Erreur: Choix invalide")
                 }
             } catch
             {
-                print(error)
+                print("Erreur de la machine à café:", error)
                 break
             }
             

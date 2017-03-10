@@ -11,6 +11,7 @@ import Foundation
 
 // Énumération des types de café
 enum TypesCafé:String {
+    case café
     case espresso
     case latte
     case cappuccino
@@ -59,6 +60,7 @@ class MachineÀCafé {
         self.inventaireGoblet   = quantGloblet
         self.inventaireSucre    = quantSucre
         self.coutDuCafé         = coutDuCafé
+
     } // init
     
     convenience init() {
@@ -102,7 +104,7 @@ class MachineÀCafé {
         inventaireGoblet -= 1
         
         ventesTotales += coutDuCafé
-        print("---> Un café \(typeCafé) est servi...")
+        print("---> Un \(typeCafé) est servi...")
         
     } // fabriquerUnCafé
     
@@ -118,16 +120,16 @@ class MachineÀCafé {
         
         let inventaire = self.obtenirInventaire()
         // http://www.duxburysystems.com/documentation/dbt11.1/miscellaneous/Special_Characters/Unicode_25xx.htm
-        var texteInventaire = "\n┌─────────────────────────────────┐"
-        texteInventaire    += "\n│ Inventaire de la machine à café │"
-        texteInventaire    += "\n└─────────────────────────────────┘"
-        texteInventaire    += "\n\tCafé: \t\(inventaire.café)"
-        texteInventaire    += "\n\tGoblet:\t\(inventaire.goblet)"
-        texteInventaire    += "\n\tSucre:\t\(inventaire.sucre)"
-        texteInventaire    += "\n\tCrème:\t\(inventaire.crème)"
-        texteInventaire    += "\n\tVente:\t\(String(format: "%2.2f $" , inventaire.vente))"
-        texteInventaire    += "\n ═════════════════════════════════"
-        
+
+        var texteInventaire = "\n*********************************"
+        texteInventaire    += "\nInventaire de la machine à café:\n"
+        texteInventaire    += "*********************************"
+        texteInventaire    += "\n Café:   \(inventaire.café)"
+        texteInventaire    += "\n Goblet: \(inventaire.goblet)"
+        texteInventaire    += "\n Sucre:  \(inventaire.sucre)"
+        texteInventaire    += "\n Crème:  \(inventaire.crème)"
+        texteInventaire    += "\n Vente:  \(String(format: "%2.2f $" , inventaire.vente))\n"
+        texteInventaire    += "*********************************\n"
         return texteInventaire
     } // FormaterInventaire
 
