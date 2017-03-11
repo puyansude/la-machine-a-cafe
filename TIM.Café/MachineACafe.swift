@@ -36,7 +36,6 @@ struct RecettesCafé : OptionSet, Hashable, CustomStringConvertible {
         return self.rawValue
     }
     
-    
     // Ingrédients
     static let café        = RecettesCafé(rawValue: 1 << 0) // 00000001  1
     static let crème       = RecettesCafé(rawValue: 1 << 1) // 00000010  2
@@ -49,7 +48,7 @@ struct RecettesCafé : OptionSet, Hashable, CustomStringConvertible {
     // Accessoires de la machine à café
     static let goblet      = RecettesCafé(rawValue: 1 << 8) //100000000  256
     static let couvercle   = RecettesCafé(rawValue: 1 << 9)
-    static let change      = RecettesCafé(rawValue: 1 << 10)
+    //static let change      = RecettesCafé(rawValue: 1 << 10)
     
     // Recettes
     static let caféMaison:RecettesCafé  = [.goblet, .couvercle, .café, .sucre, .crème]
@@ -66,11 +65,20 @@ struct RecettesCafé : OptionSet, Hashable, CustomStringConvertible {
             case RecettesCafé.crème: return "crème"
             case RecettesCafé.cannelle: return "cannelle"
             case RecettesCafé.vanille: return "vanille"
+            case RecettesCafé.caféMaison: return "café maison"
+            case RecettesCafé.espresso: return "espresso"
+            case RecettesCafé.cappuccino: return "cappuccino"
+            case RecettesCafé.latte: return "latte"
+            case RecettesCafé.affogato: return "affogato"
+            case RecettesCafé.mocha: return "mocha"
+            
             default: return "Ingrédient non défini"
         } // switch self
     } // var description
     
 }
+
+
 
 // Énumération des types de café
 enum TypesCafé:String {
@@ -110,7 +118,7 @@ final class MachineÀCafé {
         .vanille    : 0,
         .goblet     : 0,
         .couvercle  : 0,
-        .change     : 0
+        //.change     : 0
     ]
     
     var accèsÀUneSourceDEau = true
@@ -133,7 +141,7 @@ final class MachineÀCafé {
         coutDuCafé:    Float){
         printCouleur("### Je suis le constructeur de la classe 'MachineÀCafé' ###\n", .green)
         
-        // Il est possible d'indicer le dictionnaire avec RecettesCafé parce que RecettesCafé est conforme protocole 'Hashable'
+        // Il est possible d'indicer le dictionnaire avec RecettesCafé parce que RecettesCafé est conforme au protocole 'Hashable'
         inventaireMachineCafé[.café]!       = quantCafé
         inventaireMachineCafé[.crème]!      = quantCrème
         inventaireMachineCafé[.sucre]!      = quantSucre
@@ -141,7 +149,7 @@ final class MachineÀCafé {
         inventaireMachineCafé[.vanille]!    = quantVanille
         inventaireMachineCafé[.goblet]!     = quantGloblet
         inventaireMachineCafé[.couvercle]!  = 10
-        inventaireMachineCafé[.change]!     = 10
+        //inventaireMachineCafé[.change]!     = 10
         self.coutDuCafé                     = coutDuCafé
         
     } // init
@@ -169,20 +177,6 @@ final class MachineÀCafé {
     }
     
     // Les méthodes d'instance
-    private func obtenirNomCafé(_ uneRecetteDeCafé:RecettesCafé) -> String {
-        
-        var caféInfo:Dictionary<RecettesCafé, TypesCafé> =
-            [RecettesCafé.caféMaison : .café,
-             RecettesCafé.cappuccino : .cappuccino,
-             RecettesCafé.affogato   : .affogato,
-             RecettesCafé.espresso   : .espresso,
-             RecettesCafé.latte      : .latte,
-             RecettesCafé.mocha      : .mocha,]
-        
-        guard let nomCafé = caféInfo[uneRecetteDeCafé] else {return "Erreur typeCafé non défini"}
-        return nomCafé.rawValue
-    }
-    
     func infuser(_ unCafé:RecettesCafé, crème:Int = 0, sucre:Int = 0, extraFort:Bool = false) throws {
         
         MAJInventaire(café:unCafé)
@@ -206,7 +200,7 @@ final class MachineÀCafé {
         inventaireMachineCafé[.goblet]!    -= 1
         
         ventesTotales += coutDuCafé
-        print("---> Un \(obtenirNomCafé(unCafé)) est servi...")
+        print("---> Un \(unCafé) est servi...")
         
     } // fabriquerUnCafé
     
@@ -235,15 +229,20 @@ final class MachineÀCafé {
     // ********************************************
     
     
-    private func MAJInventaire(café:RecettesCafé)
+    private func MAJInventaire(café:RecettesCafé) /* throws */
     {
         var totalSucre      = 0
         var totalCafé       = 0
         var totalCrème      = 0
         var totalCannelle   = 0
         var totalVanille    = 0
-        
-         print("Ingrédients requis pour fabriquer le café:\n")
+
+        // Helper fn
+        func dispo(_ ingrédient: RecettesCafé, _ quantité: Int) -> Bool {
+            return traiterInventaire(opération: disponibilité, ingrédient: ingrédient, quantité: quantité)
+        }
+
+        print("Ingrédients requis pour fabriquer le café:\n")
         if café.contains(.café)         { _=dispo(.café, 1); totalCafé += 1}
         if café.contains(.sucre)        { _=dispo(.sucre, 1);totalSucre += 1 }
         if café.contains(.crème)        { _=dispo(.crème, 1);totalCrème += 1 }
@@ -252,14 +251,10 @@ final class MachineÀCafé {
         if café.contains(.doubleCrème)  { _=dispo(.crème, 2);totalCrème += 2 }
         if café.contains(.cannelle)     { _=dispo(.cannelle, 1);totalCannelle += 1 }
         if café.contains(.vanille )     { _=dispo(.vanille, 1);totalVanille += 1 }
-        
-       // print("Ingrédients requis pour fabriquer le café:\n -->totalCafé: \(totalCafé), totalSucre: \(totalSucre), totalCrème: \(totalCrème), totalCannelle: \(totalCannelle), totalVanille: \(totalVanille)")
-        
-    }
+
+
+    } // MAJInventaire
     
-    func dispo(_ ingrédient: RecettesCafé, _ quantité: Int) -> Bool {
-        return traiterInventaire(opération: disponibilité, ingrédient: ingrédient, quantité: quantité)
-    }
     
     
     // Note: Utilisation de n-tuples pour le retour des valeurs
