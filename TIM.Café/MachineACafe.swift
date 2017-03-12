@@ -60,19 +60,19 @@ struct RecettesCafé : OptionSet, Hashable, CustomStringConvertible {
     
     var description:String {
         switch self {
-            case RecettesCafé.café: return "café"
-            case RecettesCafé.sucre: return "sucre"
-            case RecettesCafé.crème: return "crème"
-            case RecettesCafé.cannelle: return "cannelle"
-            case RecettesCafé.vanille: return "vanille"
-            case RecettesCafé.caféMaison: return "café maison"
-            case RecettesCafé.espresso: return "espresso"
-            case RecettesCafé.cappuccino: return "cappuccino"
-            case RecettesCafé.latte: return "latte"
-            case RecettesCafé.affogato: return "affogato"
-            case RecettesCafé.mocha: return "mocha"
+        case RecettesCafé.café: return "café"
+        case RecettesCafé.sucre: return "sucre"
+        case RecettesCafé.crème: return "crème"
+        case RecettesCafé.cannelle: return "cannelle"
+        case RecettesCafé.vanille: return "vanille"
+        case RecettesCafé.caféMaison: return "café maison"
+        case RecettesCafé.espresso: return "espresso"
+        case RecettesCafé.cappuccino: return "cappuccino"
+        case RecettesCafé.latte: return "latte"
+        case RecettesCafé.affogato: return "affogato"
+        case RecettesCafé.mocha: return "mocha"
             
-            default: return "Ingrédient non défini"
+        default: return "Ingrédient non défini"
         } // switch self
     } // var description
     
@@ -108,6 +108,7 @@ protocol MachineÀCaféDelegate {
 
 //
 // final class = pas possible de créer de nouvelles classes à partir de celle-ci.
+
 final class MachineÀCafé {
     
     var inventaireMachineCafé:Dictionary<RecettesCafé, Int> = [
@@ -125,12 +126,23 @@ final class MachineÀCafé {
     var changeDisponible    = 5
     var ventesTotales:Float = 0.0
     let coutDuCafé:Float
+    /// <#Description#>
     var delegate:MachineÀCaféDelegate?
     
     // lazy = créer l'instance seulement à la première utilisation
     lazy var numberFormatter = NumberFormatter()
     
     // Le constructeur
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - quantCafé: <#quantCafé description#>
+    ///   - quantGloblet: <#quantGloblet description#>
+    ///   - quantSucre: <#quantSucre description#>
+    ///   - quantCrème: <#quantCrème description#>
+    ///   - quantCannelle: <#quantCannelle description#>
+    ///   - quantVanille: <#quantVanille description#>
+    ///   - coutDuCafé: <#coutDuCafé description#>
     init(
         quantCafé:     Int,
         quantGloblet:  Int,
@@ -154,7 +166,7 @@ final class MachineÀCafé {
         
     } // init
     
-    // Un constructeur de convenance pour le programmeur paresseux.
+    /// Un constructeur de convenance pour le programmeur paresseux.
     convenience init() {
         self.init(quantCafé:    12,
                   quantGloblet: 12,
@@ -177,6 +189,16 @@ final class MachineÀCafé {
     }
     
     // Les méthodes d'instance
+    
+    // ====================================================
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - unCafé: <#unCafé description#>
+    ///   - crème: <#crème description#>
+    ///   - sucre: <#sucre description#>
+    ///   - extraFort: <#extraFort description#>
+    /// - Throws: <#throws value description#>
     func infuser(_ unCafé:RecettesCafé, crème:Int = 0, sucre:Int = 0, extraFort:Bool = false) throws {
         
         MAJInventaire(café:unCafé)
@@ -204,22 +226,71 @@ final class MachineÀCafé {
         
     } // fabriquerUnCafé
     
-    // Les méthodes de traitements de l'inventaire:
-    // ********************************************
-    func traiterInventaire( opération: ( _ :RecettesCafé, _ :Int) -> Bool, ingrédient:RecettesCafé, quantité:Int) -> Bool {
+    // ====================================================
+    /**
+     Les méthodes de traitements de l'inventaire:
+     
+     - author: Alain Boudreault
+     - important:  Ce code n'est pas passé par le QA
+     - version:    0.1
+     - throws:     des fleurs.
+
+     - parameter opération:  nom d'une méthode à exécuter
+     - parameter ing: à passer à la méthode
+     - parameter quant: à passer à la méthode
+     - parameter ingrédient: ingrédient sur lequel appliquer la méthode
+     - parameter quantité:   quantité servant à actualiser l'inventaire
+     - returns:    true si l'opération a réussi sinon false
+     - more:       rien à dire
+     
+     */
+
+    // ====================================================
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - opération: <#opération description#>
+    ///   - ingrédient: <#ingrédient description#>
+    ///   - quantité: <#quantité description#>
+    /// - Returns: <#return value description#>
+    func traiterInventaire( opération: ( _ ing:RecettesCafé, _ quant:Int) -> Bool, ingrédient:RecettesCafé, quantité:Int) -> Bool {
         return opération(ingrédient, quantité)
     } // traiterInventaire
     
+    
+    // ====================================================
+    /// Permet d'ajouter une quantité à un ingrédient de la machine à café.
+    ///
+    /// - Parameters:
+    ///   - ingrédient: <#ingrédient description#>
+    ///   - quantité: <#quantité description#>
+    /// - Returns: <#return value description#>
     func ajouter( ingrédient :RecettesCafé, quantité :Int) -> Bool  {
         print("Inventaire: ajouter")
         return true
     } // ajouter
     
+    
+    // ====================================================
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - ingrédient: <#ingrédient description#>
+    ///   - quantité: <#quantité description#>
+    /// - Returns: <#return value description#>
     func retirer( ingrédient :RecettesCafé, quantité :Int) -> Bool  {
         print("Inventaire: retirer")
         return true
     }  // retirer
     
+    
+    // ====================================================
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - ingrédient: <#ingrédient description#>
+    ///   - quantité: <#quantité description#>
+    /// - Returns: <#return value description#>
     func disponibilité( ingrédient :RecettesCafé, quantité :Int) -> Bool  {
         let ingrédientDisponible = inventaireMachineCafé[ingrédient]! >= quantité ? true : false
         print("\(quantité) \(ingrédient) disponibilité: \(ingrédientDisponible)")
@@ -229,6 +300,11 @@ final class MachineÀCafé {
     // ********************************************
     
     
+    // ====================================================
+    /// <#Description#>
+    ///
+    /// - Parameter café: <#café description#>
+    /// - Throws: <#throws value description#>
     private func MAJInventaire(café:RecettesCafé) /* throws */
     {
         var totalSucre      = 0
@@ -236,12 +312,12 @@ final class MachineÀCafé {
         var totalCrème      = 0
         var totalCannelle   = 0
         var totalVanille    = 0
-
+        
         // Helper fn
         func dispo(_ ingrédient: RecettesCafé, _ quantité: Int) -> Bool {
             return traiterInventaire(opération: disponibilité, ingrédient: ingrédient, quantité: quantité)
         }
-
+        
         print("Ingrédients requis pour fabriquer le café:\n")
         if café.contains(.café)         { _=dispo(.café, 1); totalCafé += 1}
         if café.contains(.sucre)        { _=dispo(.sucre, 1);totalSucre += 1 }
@@ -251,13 +327,24 @@ final class MachineÀCafé {
         if café.contains(.doubleCrème)  { _=dispo(.crème, 2);totalCrème += 2 }
         if café.contains(.cannelle)     { _=dispo(.cannelle, 1);totalCannelle += 1 }
         if café.contains(.vanille )     { _=dispo(.vanille, 1);totalVanille += 1 }
-
-
+        
+        
     } // MAJInventaire
     
     
-    
-    // Note: Utilisation de n-tuples pour le retour des valeurs
+    // ====================================================
+    /**
+     Une description pour aider le programmeur fatigué...
+     
+     - author: Alain Boudreault
+     - important:  Ce code n'est pas passé par le QA
+     - version:    1.0
+     - throws:      des fleurs.
+     
+     - returns:     Utilisation de n-tuples pour le retour des valeurs.
+     - more:        rien à dire
+     
+     */
     func obtenirInventaire() -> (café:Int, goblet:Int, sucre:Int, crème:Int,vente:Float ){
         return (inventaireMachineCafé[.café]!,
                 inventaireMachineCafé[.goblet]!,
@@ -269,7 +356,10 @@ final class MachineÀCafé {
     
 } // MachineÀCafé
 
-// Ajout de fonctionnalités è la classe 'MachineÀCafé'
+// Ajout de fonctionnalités à la classe 'MachineÀCafé'
+
+// MARK: - <#CustomStringConvertible#>
+// ====================================================
 extension MachineÀCafé: CustomStringConvertible {
     // Implémentation du protocole CustomStringConvertible
     var description: String {

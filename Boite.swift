@@ -1,3 +1,4 @@
+// ====================================================
 //
 //  Boite.swift
 //  TIM.Café
@@ -5,6 +6,7 @@
 //  Created by Alain on 17-03-09.
 //  Copyright © 2017 Alain. All rights reserved.
 //
+// ====================================================
 
 import Foundation
 /*
@@ -18,12 +20,9 @@ import Foundation
 // Note: valeur par défaut d'un param ne peut pas être une propriété de la classe
 let largeurParDéfaut = 35
 
+// =====================================================
+/// <#Description#>
 class Boite {
-
-    private func ab(_ a:String, b: Int) {
-        print("ab")
-    }
-    
     // http://www.duxburysystems.com/documentation/dbt11.1/miscellaneous/Special_Characters/Unicode_25xx.htm
     enum caractèresPourTracerLaBoite: String {
      case horizontal            = "─"
@@ -39,8 +38,18 @@ class Boite {
      case séparateurDroit       = "┤"
         
     } // enum caractèresPourTracerLaBoite
+    // FIN =================================================
 
 
+    // =====================================================
+    /// <#Description#>
+    ///
+    /// - Author: Alain Boudreault
+    /// - Parameters:
+    ///   - titre: <#titre description#>
+    ///   - couleur: <#couleur description#>
+    ///   - gras: <#gras description#>
+    ///   - longueur: <#longueur description#>
     static func entete(_ titre: String, couleur: String = "", gras:Bool = false, longueur:Int = largeurParDéfaut) {
         
         tracerLigne(longueur: longueur, position: .haut)
@@ -48,11 +57,28 @@ class Boite {
         tracerLigne(longueur: longueur, position: .basEntête)
         
     } // entete
+    // FIN =================================================
     
+    
+    // =====================================================
+    /// <#Description#>
+    ///
+    /// - haut: <#haut description#>
+    /// - bas: <#bas description#>
+    /// - basEntête: <#basEntête description#>
+    /// - séparateur: <#séparateur description#>
     enum PositionLigne{
         case haut, bas, basEntête, séparateur
-    }
+    } // PositionLigne
+    // FIN =================================================
     
+    // =====================================================
+     /// <#Description#>
+     /// - Author:
+     ///
+     /// - Parameters:
+     ///   - longueur: <#longueur description#>
+     ///   - position: <#position description#>
      static func tracerLigne(longueur:Int = largeurParDéfaut, position: PositionLigne) {
         var coinGauche:String
         var coinDroit:String
@@ -81,10 +107,20 @@ class Boite {
         ligne += carHorizontal.répéter(longueur - 2)
         
         print(ligne + coinDroit)
-        
-    }
+    } // tracerLigne
+    // FIN =================================================
 
 
+    // =====================================================
+    /// <#Description#>
+    ///
+    /// - Author: Alain Boudreault
+    /// - Parameters:
+    ///   - chaines: <#chaines description#>
+    ///   - couleur: <#couleur description#>
+    ///   - gras: <#gras description#>
+    ///   - centré: <#centré description#>
+    ///   - longueur: <#longueur description#>
     static func afficher( _ chaines: String ... , couleur: String = "", gras:Bool = false, centré:Bool = false, longueur:Int = largeurParDéfaut) {
     
         var lesChaines = ""
@@ -105,6 +141,7 @@ class Boite {
         concaténation += caractèresPourTracerLaBoite.vertical.rawValue
         print (concaténation)
     } // afficher
-    
+    // FIN =================================================
 
 } // Boite
+// FIN =================================================

@@ -23,7 +23,7 @@ class ViewController: UIViewController, MachineÀCaféDelegate {
         }
     }
     
-    override func viewDidLoad() {
+    override func   {
         super.viewDidLoad()
         uneMachineÀCafé.delegate = self
         /*
