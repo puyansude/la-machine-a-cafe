@@ -22,6 +22,24 @@
 
 import Foundation
 
+enum IngrédientsRawValue: Int {
+    case café         =  0b0000000001
+    case crème        =  0b0000000010
+    case doubleCrème  =  0b0000000100
+    case sucre        =  0b0000001000
+    case doubleSucre  =  0b0000010000
+    case doubleCafé   =  0b0000100000
+    case cannelle     =  0b0001000000
+    case vanille      =  0b0010000000
+    case goblet       =  0b0100000000
+    case couvercle    =  0b1000000000
+
+    var valeur: Int {
+        return self.rawValue
+    }
+
+} // IngrédientsRawValue
+
 struct RecettesCafé : OptionSet, Hashable, CustomStringConvertible {
     
     // Implémentation du protocole OptionSet: donne accès à des fn de la théorie des ensembles: test, union, intersection, ...
@@ -37,17 +55,17 @@ struct RecettesCafé : OptionSet, Hashable, CustomStringConvertible {
     }
     
     // Ingrédients
-    static let café        = RecettesCafé(rawValue: 1 << 0) // 00000001  1
-    static let crème       = RecettesCafé(rawValue: 1 << 1) // 00000010  2
-    static let doubleCrème = RecettesCafé(rawValue: 1 << 2) // 00000100  4
-    static let sucre       = RecettesCafé(rawValue: 1 << 3) // 00001000  8
-    static let doubleSucre = RecettesCafé(rawValue: 1 << 4) // 00010000  16
-    static let doubleCafé  = RecettesCafé(rawValue: 1 << 5) // 00100000  32
-    static let cannelle    = RecettesCafé(rawValue: 1 << 6) // 01000000  64
-    static let vanille     = RecettesCafé(rawValue: 1 << 7) // 10000000  128
+    static let café        = RecettesCafé(rawValue: IngrédientsRawValue.café.valeur)
+    static let crème       = RecettesCafé(rawValue: IngrédientsRawValue.crème.valeur)
+    static let doubleCrème = RecettesCafé(rawValue: IngrédientsRawValue.doubleCrème.valeur)
+    static let sucre       = RecettesCafé(rawValue: IngrédientsRawValue.sucre.valeur)
+    static let doubleSucre = RecettesCafé(rawValue: IngrédientsRawValue.doubleSucre.valeur)
+    static let doubleCafé  = RecettesCafé(rawValue: IngrédientsRawValue.doubleCafé.valeur)
+    static let cannelle    = RecettesCafé(rawValue: IngrédientsRawValue.cannelle.valeur)
+    static let vanille     = RecettesCafé(rawValue: IngrédientsRawValue.vanille.valeur)
     // Accessoires de la machine à café
-    static let goblet      = RecettesCafé(rawValue: 1 << 8) //100000000  256
-    static let couvercle   = RecettesCafé(rawValue: 1 << 9)
+    static let goblet      = RecettesCafé(rawValue: IngrédientsRawValue.goblet.valeur)
+    static let couvercle   = RecettesCafé(rawValue: IngrédientsRawValue.couvercle.valeur)
     //static let change      = RecettesCafé(rawValue: 1 << 10)
     
     // Recettes
@@ -60,6 +78,8 @@ struct RecettesCafé : OptionSet, Hashable, CustomStringConvertible {
     
     var description:String {
         switch self {
+        case RecettesCafé.goblet: return "goblet"
+        case RecettesCafé.couvercle: return "couvercle"
         case RecettesCafé.café: return "café"
         case RecettesCafé.sucre: return "sucre"
         case RecettesCafé.crème: return "crème"
@@ -75,8 +95,7 @@ struct RecettesCafé : OptionSet, Hashable, CustomStringConvertible {
         default: return "Ingrédient non défini"
         } // switch self
     } // var description
-    
-}
+} // struct RecettesCafé
 
 
 
@@ -97,7 +116,14 @@ enum ErreursDeLaMachineÀCafé: Error {
     case plusDeSucre
     case plusDeCrème
     case plusDeChange
+    case plusDeCannelle
+    case plusDeVanille
+    case plusDeCouvercle
     case plusAccèsÀUneSourceDEau
+    case impossibleDeLireInventaire
+    case inventaireInsuffisant
+    case impossibleAjouterInventaire
+    case impossibleModifierInventaire
 }
 
 /* @objc */
@@ -146,6 +172,7 @@ final class MachineÀCafé {
     init(
         quantCafé:     Int,
         quantGloblet:  Int,
+        quantCouvercle:Int,
         quantSucre:    Int,
         quantCrème:    Int,
         quantCannelle: Int,
@@ -160,7 +187,7 @@ final class MachineÀCafé {
         inventaireMachineCafé[.cannelle]!   = quantCannelle
         inventaireMachineCafé[.vanille]!    = quantVanille
         inventaireMachineCafé[.goblet]!     = quantGloblet
-        inventaireMachineCafé[.couvercle]!  = 10
+        inventaireMachineCafé[.couvercle]!  = quantCouvercle
         //inventaireMachineCafé[.change]!     = 10
         self.coutDuCafé                     = coutDuCafé
         
@@ -168,12 +195,13 @@ final class MachineÀCafé {
     
     /// Un constructeur de convenance pour le programmeur paresseux.
     convenience init() {
-        self.init(quantCafé:    12,
-                  quantGloblet: 12,
-                  quantSucre:   6,
-                  quantCrème:   6,
-                  quantCannelle:6,
-                  quantVanille: 4,
+        self.init(quantCafé:    4,
+                  quantGloblet: 2,
+                  quantCouvercle:1,
+                  quantSucre:   4,
+                  quantCrème:   4,
+                  quantCannelle:1,
+                  quantVanille: 1,
                   coutDuCafé:   2.25)
     }  // convenience init()
     
@@ -201,25 +229,18 @@ final class MachineÀCafé {
     /// - Throws: <#throws value description#>
     func infuser(_ unCafé:RecettesCafé, crème:Int = 0, sucre:Int = 0, extraFort:Bool = false) throws {
         
-        MAJInventaire(café:unCafé)
+        // Exception passée à 'infuser() throws'
+        try traiterLesIngrédients(café:unCafé)
         
-        guard inventaireMachineCafé[RecettesCafé.café]! > 0 else {
-            throw ErreursDeLaMachineÀCafé.plusDeCafé
-        }
+        // exception ne sera pas passé à 'infuser() throws'
+        // do { try traiterLesIngrédients(café:unCafé) } catch { }
         
-        guard inventaireMachineCafé[RecettesCafé.goblet]! > 0 else {
-            throw ErreursDeLaMachineÀCafé.plusDeGoblet
-        }
-        
-        // un nombre entre 0 et 9
+        // Générer, de façon aléatoire, un manque d'eau.
         if arc4random_uniform(10) >= 9 {
             delegate?.plusAccesADeLeau(sender:self)
             return
             // throw ErreursDeLaMachineÀCafé.plusAccèsÀUneSourceDEau
         }
-        
-        inventaireMachineCafé[.café]!      -= 1
-        inventaireMachineCafé[.goblet]!    -= 1
         
         ventesTotales += coutDuCafé
         print("---> Un \(unCafé) est servi...")
@@ -248,13 +269,12 @@ final class MachineÀCafé {
     // ====================================================
     /// <#Description#>
     ///
-    /// - Parameters:
-    ///   - opération: <#opération description#>
+    /// - Parameters:    ///   - opération: <#opération description#>
     ///   - ingrédient: <#ingrédient description#>
     ///   - quantité: <#quantité description#>
     /// - Returns: <#return value description#>
-    func traiterInventaire( opération: ( _ ing:RecettesCafé, _ quant:Int) -> Bool, ingrédient:RecettesCafé, quantité:Int) -> Bool {
-        return opération(ingrédient, quantité)
+    func traiterInventaire( opération: ( _ ing:RecettesCafé, _ quant:Int) throws -> Bool, ingrédient:RecettesCafé, quantité:Int) rethrows -> Bool {
+        return try opération(ingrédient, quantité)
     } // traiterInventaire
     
     
@@ -265,8 +285,9 @@ final class MachineÀCafé {
     ///   - ingrédient: <#ingrédient description#>
     ///   - quantité: <#quantité description#>
     /// - Returns: <#return value description#>
-    func ajouter( ingrédient :RecettesCafé, quantité :Int) -> Bool  {
+    func ajouter( ingrédient :RecettesCafé, quantité :Int) throws -> Bool  {
         print("Inventaire: ajouter")
+        guard 1 == 2 else { throw ErreursDeLaMachineÀCafé.impossibleAjouterInventaire }
         return true
     } // ajouter
     
@@ -278,11 +299,29 @@ final class MachineÀCafé {
     ///   - ingrédient: <#ingrédient description#>
     ///   - quantité: <#quantité description#>
     /// - Returns: <#return value description#>
-    func retirer( ingrédient :RecettesCafé, quantité :Int) -> Bool  {
-        print("Inventaire: retirer")
+    func retirer( ingrédient :RecettesCafé, quantité :Int) throws -> Bool  {
+        print("Inventaire -> retirer: ", terminator: "")
+        
+        guard try disponibilité(ingrédient: ingrédient, quantité: quantité) else {
+
+            switch ingrédient {
+            
+              case RecettesCafé.café : throw ErreursDeLaMachineÀCafé.plusDeCafé
+              case RecettesCafé.crème : throw ErreursDeLaMachineÀCafé.plusDeCrème
+              case RecettesCafé.sucre : throw ErreursDeLaMachineÀCafé.plusDeSucre
+              case RecettesCafé.cannelle : throw ErreursDeLaMachineÀCafé.plusDeCannelle
+              case RecettesCafé.vanille : throw ErreursDeLaMachineÀCafé.plusDeVanille
+              case RecettesCafé.couvercle : throw ErreursDeLaMachineÀCafé.plusDeCouvercle
+              case RecettesCafé.goblet : throw ErreursDeLaMachineÀCafé.plusDeGoblet
+       
+              default: throw ErreursDeLaMachineÀCafé.inventaireInsuffisant
+            }
+        } // guard disponibilité
+
+        inventaireMachineCafé[ingrédient]! -= quantité
+        
         return true
     }  // retirer
-    
     
     // ====================================================
     /// <#Description#>
@@ -291,45 +330,70 @@ final class MachineÀCafé {
     ///   - ingrédient: <#ingrédient description#>
     ///   - quantité: <#quantité description#>
     /// - Returns: <#return value description#>
-    func disponibilité( ingrédient :RecettesCafé, quantité :Int) -> Bool  {
-        let ingrédientDisponible = inventaireMachineCafé[ingrédient]! >= quantité ? true : false
-        print("\(quantité) \(ingrédient) disponibilité: \(ingrédientDisponible)")
-        
-        return ingrédientDisponible
+    func disponibilité( ingrédient :RecettesCafé, quantité :Int) throws -> Bool  {
+        let pluriel = quantité > 1 ?"s":""
+        print("\(quantité) \(ingrédient)\(pluriel), disponibilité: [\(inventaireMachineCafé[ingrédient]!)]")
+        return inventaireMachineCafé[ingrédient]! >= quantité ? true : false
+            
     } // disponibilité
     // ********************************************
-    
+
     
     // ====================================================
     /// <#Description#>
     ///
     /// - Parameter café: <#café description#>
     /// - Throws: <#throws value description#>
-    private func MAJInventaire(café:RecettesCafé) /* throws */
+    private func traiterLesIngrédients(café:RecettesCafé) throws
     {
-        var totalSucre      = 0
-        var totalCafé       = 0
-        var totalCrème      = 0
-        var totalCannelle   = 0
-        var totalVanille    = 0
-        
-        // Helper fn
-        func dispo(_ ingrédient: RecettesCafé, _ quantité: Int) -> Bool {
-            return traiterInventaire(opération: disponibilité, ingrédient: ingrédient, quantité: quantité)
+        print("Traitement des ingrédients requis pour fabriquer un [\(café)]\n")
+        if café.contains(.café)
+        {
+            try _ = traiterInventaire(opération: retirer, ingrédient: .café, quantité: 1)
         }
+
+        if café.contains(.sucre)
+        {
+            try _ = traiterInventaire(opération: retirer, ingrédient: .sucre, quantité: 1)
+        }
+
+        if café.contains(.doubleCafé)
+        {
+            try _ = traiterInventaire(opération: retirer, ingrédient: .café, quantité: 2)
+        }
+
+        if café.contains(.doubleSucre)
+        {
+            try _ = traiterInventaire(opération: retirer, ingrédient: .sucre, quantité: 2)
+        }
+
+        if café.contains(.doubleCrème)
+        {
+            try _ = traiterInventaire(opération: retirer, ingrédient: .crème, quantité: 2)
+        }
+
+        if café.contains(.cannelle)
+        {
+            try _ = traiterInventaire(opération: retirer, ingrédient: .cannelle, quantité: 1)
+        }
+
+        if café.contains(.vanille)
+        {
+            try _ = traiterInventaire(opération: retirer, ingrédient: .vanille, quantité: 1)
+        }
+
+        if café.contains(.goblet)
+        {
+            try _ = traiterInventaire(opération: retirer, ingrédient: .goblet, quantité: 1)
+        }
+
+        if café.contains(.couvercle)
+        {
+            try _ = traiterInventaire(opération: retirer, ingrédient: .couvercle, quantité: 1)
+        }
+
         
-        print("Ingrédients requis pour fabriquer le café:\n")
-        if café.contains(.café)         { _=dispo(.café, 1); totalCafé += 1}
-        if café.contains(.sucre)        { _=dispo(.sucre, 1);totalSucre += 1 }
-        if café.contains(.crème)        { _=dispo(.crème, 1);totalCrème += 1 }
-        if café.contains(.doubleCafé)   { _=dispo(.café, 2);totalCafé += 2 }
-        if café.contains(.doubleSucre)  { _=dispo(.sucre, 2);totalSucre += 2 }
-        if café.contains(.doubleCrème)  { _=dispo(.crème, 2);totalCrème += 2 }
-        if café.contains(.cannelle)     { _=dispo(.cannelle, 1);totalCannelle += 1 }
-        if café.contains(.vanille )     { _=dispo(.vanille, 1);totalVanille += 1 }
-        
-        
-    } // MAJInventaire
+    } // traiterLesIngrédients
     
     
     // ====================================================

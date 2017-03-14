@@ -42,7 +42,6 @@ class Application {
             choix = menu()
             do {
                 switch choix {
-                // TODO:  Remplacer par un tableau 'choixCafé = [.caféMaison, espresso, ...]'
                 case "1": try uneMachineÀCafé.infuser(.caféMaison, sucre: 1)
                 case "2": try uneMachineÀCafé.infuser(.espresso, crème: 1)
                 case "3": try uneMachineÀCafé.infuser(.cappuccino)
