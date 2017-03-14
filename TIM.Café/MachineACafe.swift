@@ -159,16 +159,6 @@ final class MachineÀCafé {
     lazy var numberFormatter = NumberFormatter()
     
     // Le constructeur
-    /// <#Description#>
-    ///
-    /// - Parameters:
-    ///   - quantCafé: <#quantCafé description#>
-    ///   - quantGloblet: <#quantGloblet description#>
-    ///   - quantSucre: <#quantSucre description#>
-    ///   - quantCrème: <#quantCrème description#>
-    ///   - quantCannelle: <#quantCannelle description#>
-    ///   - quantVanille: <#quantVanille description#>
-    ///   - coutDuCafé: <#coutDuCafé description#>
     init(
         quantCafé:     Int,
         quantGloblet:  Int,
@@ -219,14 +209,6 @@ final class MachineÀCafé {
     // Les méthodes d'instance
     
     // ====================================================
-    /// <#Description#>
-    ///
-    /// - Parameters:
-    ///   - unCafé: <#unCafé description#>
-    ///   - crème: <#crème description#>
-    ///   - sucre: <#sucre description#>
-    ///   - extraFort: <#extraFort description#>
-    /// - Throws: <#throws value description#>
     func infuser(_ unCafé:RecettesCafé, crème:Int = 0, sucre:Int = 0, extraFort:Bool = false) throws {
         
         // Exception passée à 'infuser() throws'
@@ -267,12 +249,6 @@ final class MachineÀCafé {
      */
 
     // ====================================================
-    /// <#Description#>
-    ///
-    /// - Parameters:    ///   - opération: <#opération description#>
-    ///   - ingrédient: <#ingrédient description#>
-    ///   - quantité: <#quantité description#>
-    /// - Returns: <#return value description#>
     func traiterInventaire( opération: ( _ ing:RecettesCafé, _ quant:Int) throws -> Bool, ingrédient:RecettesCafé, quantité:Int) rethrows -> Bool {
         return try opération(ingrédient, quantité)
     } // traiterInventaire
@@ -280,25 +256,14 @@ final class MachineÀCafé {
     
     // ====================================================
     /// Permet d'ajouter une quantité à un ingrédient de la machine à café.
-    ///
-    /// - Parameters:
-    ///   - ingrédient: <#ingrédient description#>
-    ///   - quantité: <#quantité description#>
-    /// - Returns: <#return value description#>
     func ajouter( ingrédient :RecettesCafé, quantité :Int) throws -> Bool  {
         print("Inventaire: ajouter")
-        guard 1 == 2 else { throw ErreursDeLaMachineÀCafé.impossibleAjouterInventaire }
+        // guard ... else { throw ErreursDeLaMachineÀCafé.impossibleAjouterInventaire }
         return true
     } // ajouter
     
     
     // ====================================================
-    /// <#Description#>
-    ///
-    /// - Parameters:
-    ///   - ingrédient: <#ingrédient description#>
-    ///   - quantité: <#quantité description#>
-    /// - Returns: <#return value description#>
     func retirer( ingrédient :RecettesCafé, quantité :Int) throws -> Bool  {
         print("Inventaire -> retirer: ", terminator: "")
         
@@ -324,12 +289,6 @@ final class MachineÀCafé {
     }  // retirer
     
     // ====================================================
-    /// <#Description#>
-    ///
-    /// - Parameters:
-    ///   - ingrédient: <#ingrédient description#>
-    ///   - quantité: <#quantité description#>
-    /// - Returns: <#return value description#>
     func disponibilité( ingrédient :RecettesCafé, quantité :Int) throws -> Bool  {
         let pluriel = quantité > 1 ?"s":""
         print("\(quantité) \(ingrédient)\(pluriel), disponibilité: [\(inventaireMachineCafé[ingrédient]!)]")
@@ -340,12 +299,11 @@ final class MachineÀCafé {
 
     
     // ====================================================
-    /// <#Description#>
-    ///
-    /// - Parameter café: <#café description#>
-    /// - Throws: <#throws value description#>
     private func traiterLesIngrédients(café:RecettesCafé) throws
     {
+        //TODO: implémenter les protocoles Sequence et IteratorProtocol sur RecettesCafé
+        //      pour pouvoir itérer sur les ingrédients de la recette 
+        //      et éliminer les "if café.contains()"
         print("Traitement des ingrédients requis pour fabriquer un [\(café)]\n")
         if café.contains(.café)
         {
@@ -409,11 +367,14 @@ final class MachineÀCafé {
      - more:        rien à dire
      
      */
-    func obtenirInventaire() -> (café:Int, goblet:Int, sucre:Int, crème:Int,vente:Float ){
+    func obtenirInventaire() -> (café:Int, goblet:Int, couvercle:Int, sucre:Int, crème:Int, cannelle:Int, vanille:Int, vente:Float ){
         return (inventaireMachineCafé[.café]!,
                 inventaireMachineCafé[.goblet]!,
+                inventaireMachineCafé[.couvercle]!,
                 inventaireMachineCafé[.sucre]!,
                 inventaireMachineCafé[.crème]!,
+                inventaireMachineCafé[.cannelle]!,
+                inventaireMachineCafé[.vanille]!,
                 ventesTotales)
     } // obtenirInventaire()
     
@@ -435,11 +396,14 @@ extension MachineÀCafé: CustomStringConvertible {
         var texteInventaire = "\n*********************************"
         texteInventaire    += "\nInventaire de la machine à café:\n"
         texteInventaire    += "*********************************"
-        texteInventaire    += "\n Café:   \(inventaire.café)"
-        texteInventaire    += "\n Goblet: \(inventaire.goblet)"
-        texteInventaire    += "\n Sucre:  \(inventaire.sucre)"
-        texteInventaire    += "\n Crème:  \(inventaire.crème)"
-        texteInventaire    += "\n Vente:  \(numberFormatter.string(from: NSNumber(value: inventaire.vente))!)\n" // String(format: "%2.2f $" , inventaire.vente)
+        texteInventaire    += "\n Café:      \(inventaire.café)"
+        texteInventaire    += "\n Goblet:    \(inventaire.goblet)"
+        texteInventaire    += "\n Couvercle: \(inventaire.couvercle)"
+        texteInventaire    += "\n Sucre:     \(inventaire.sucre)"
+        texteInventaire    += "\n Crème:     \(inventaire.crème)"
+        texteInventaire    += "\n Cannelle:  \(inventaire.cannelle)"
+        texteInventaire    += "\n Vanille:   \(inventaire.vanille)"
+        texteInventaire    += "\n Vente:     \(numberFormatter.string(from: NSNumber(value: inventaire.vente))!)\n" // String(format: "%2.2f $" , inventaire.vente)
         texteInventaire    += "*********************************\n"
         
         return texteInventaire
