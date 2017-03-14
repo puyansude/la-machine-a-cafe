@@ -11,7 +11,7 @@ import Foundation
 class MonApplication: Application, MachineÀCaféDelegate {
 
     internal func plusAccesADeLeau(sender: MachineÀCafé) {
-        print("Erreur: La machine à café n'a plus accès à de l'eau!")
+        print("MachineÀCaféDelegate: La machine à café n'a plus accès à de l'eau!")
     } // plusAccesADeLeau
 
     override init(){

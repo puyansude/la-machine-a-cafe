@@ -181,6 +181,8 @@ final class MachineÀCafé {
         //inventaireMachineCafé[.change]!     = 10
         self.coutDuCafé                     = coutDuCafé
         
+        print(self)
+        
     } // init
     
     /// Un constructeur de convenance pour le programmeur paresseux.
@@ -210,6 +212,13 @@ final class MachineÀCafé {
     
     // ====================================================
     func infuser(_ unCafé:RecettesCafé, crème:Int = 0, sucre:Int = 0, extraFort:Bool = false) throws {
+
+        // Générer, de façon aléatoire, un manque d'eau.
+        if arc4random_uniform(10) >= 9 {
+            delegate?.plusAccesADeLeau(sender:self)
+            return
+            // throw ErreursDeLaMachineÀCafé.plusAccèsÀUneSourceDEau
+        }
         
         // Exception passée à 'infuser() throws'
         try traiterLesIngrédients(café:unCafé)
@@ -217,12 +226,6 @@ final class MachineÀCafé {
         // exception ne sera pas passé à 'infuser() throws'
         // do { try traiterLesIngrédients(café:unCafé) } catch { }
         
-        // Générer, de façon aléatoire, un manque d'eau.
-        if arc4random_uniform(10) >= 9 {
-            delegate?.plusAccesADeLeau(sender:self)
-            return
-            // throw ErreursDeLaMachineÀCafé.plusAccèsÀUneSourceDEau
-        }
         
         ventesTotales += coutDuCafé
         print("---> Un \(unCafé) est servi...")
