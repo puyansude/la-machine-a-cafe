@@ -19,96 +19,10 @@
 //  passer une fonction en paramètre, ...
 //  -----------------------------------------------------
 
-
 import Foundation
 
-enum IngrédientsRawValue: Int {
-    case café         =  0b0000000001
-    case crème        =  0b0000000010
-    case doubleCrème  =  0b0000000100
-    case sucre        =  0b0000001000
-    case doubleSucre  =  0b0000010000
-    case doubleCafé   =  0b0000100000
-    case cannelle     =  0b0001000000
-    case vanille      =  0b0010000000
-    case goblet       =  0b0100000000
-    case couvercle    =  0b1000000000
 
-    var valeur: Int {
-        return self.rawValue
-    }
-
-} // IngrédientsRawValue
-
-struct RecettesCafé : OptionSet, Hashable, CustomStringConvertible {
-    
-    // Implémentation du protocole OptionSet: donne accès à des fn de la théorie des ensembles: test, union, intersection, ...
-    let rawValue: Int
-    
-    // Implémentation du protocole Hashable -> programmer un getter pour 'hashValue'
-    // La variable 'hashValue' sera utilisée dans un contexte d'indice.
-    // Par exemple, au lieu de unTableau[RecettesCafé.crème.rawValue] il sera
-    // possible d'utiliser la forme unTableau[RecettesCafé.crème]
-    // https://fr.wikipedia.org/wiki/Fonction_de_hachage
-    var hashValue: Int {
-        return self.rawValue
-    }
-    
-    // Ingrédients
-    static let café        = RecettesCafé(rawValue: IngrédientsRawValue.café.valeur)
-    static let crème       = RecettesCafé(rawValue: IngrédientsRawValue.crème.valeur)
-    static let doubleCrème = RecettesCafé(rawValue: IngrédientsRawValue.doubleCrème.valeur)
-    static let sucre       = RecettesCafé(rawValue: IngrédientsRawValue.sucre.valeur)
-    static let doubleSucre = RecettesCafé(rawValue: IngrédientsRawValue.doubleSucre.valeur)
-    static let doubleCafé  = RecettesCafé(rawValue: IngrédientsRawValue.doubleCafé.valeur)
-    static let cannelle    = RecettesCafé(rawValue: IngrédientsRawValue.cannelle.valeur)
-    static let vanille     = RecettesCafé(rawValue: IngrédientsRawValue.vanille.valeur)
-    // Accessoires de la machine à café
-    static let goblet      = RecettesCafé(rawValue: IngrédientsRawValue.goblet.valeur)
-    static let couvercle   = RecettesCafé(rawValue: IngrédientsRawValue.couvercle.valeur)
-    //static let change      = RecettesCafé(rawValue: 1 << 10)
-    
-    // Recettes
-    static let caféMaison:RecettesCafé  = [.goblet, .couvercle, .café, .sucre, .crème]
-    static let espresso:RecettesCafé    = [.goblet, .café]
-    static let cappuccino:RecettesCafé  = [.goblet, .doubleCafé, .doubleCrème, .cannelle]
-    static let latte:RecettesCafé       = [.goblet, .café, .doubleCrème]
-    static let affogato:RecettesCafé    = [.goblet, .couvercle, .doubleCafé, .sucre, .doubleCrème, .vanille]
-    static let mocha:RecettesCafé       = [goblet, café, doubleCrème, doubleSucre] // valide sans le . mais pas d'aide de Xcode pour proposer des choix possibles.
-    
-    var description:String {
-        switch self {
-        case RecettesCafé.goblet: return "goblet"
-        case RecettesCafé.couvercle: return "couvercle"
-        case RecettesCafé.café: return "café"
-        case RecettesCafé.sucre: return "sucre"
-        case RecettesCafé.crème: return "crème"
-        case RecettesCafé.cannelle: return "cannelle"
-        case RecettesCafé.vanille: return "vanille"
-        case RecettesCafé.caféMaison: return "café maison"
-        case RecettesCafé.espresso: return "espresso"
-        case RecettesCafé.cappuccino: return "cappuccino"
-        case RecettesCafé.latte: return "latte"
-        case RecettesCafé.affogato: return "affogato"
-        case RecettesCafé.mocha: return "mocha"
-            
-        default: return "Ingrédient non défini"
-        } // switch self
-    } // var description
-} // struct RecettesCafé
-
-
-
-// Énumération des types de café
-enum TypesCafé:String {
-    case café = "café maison"
-    case espresso
-    case latte
-    case cappuccino
-    case affogato
-    case mocha
-}
-
+// ====================================================
 // Énumération des erreurs de la machine à café
 enum ErreursDeLaMachineÀCafé: Error {
     case plusDeCafé
@@ -126,17 +40,18 @@ enum ErreursDeLaMachineÀCafé: Error {
     case impossibleModifierInventaire
 }
 
+// ====================================================
 /* @objc */
 protocol MachineÀCaféDelegate {
     /* @objc optional */
     func plusAccesADeLeau(sender:MachineÀCafé)
 }
 
-//
+// ====================================================
 // final class = pas possible de créer de nouvelles classes à partir de celle-ci.
-
 final class MachineÀCafé {
     
+    // ====================================================
     var inventaireMachineCafé:Dictionary<RecettesCafé, Int> = [
         .café       : 0,  // RecettesCafé sous entendu pas inférence
         .sucre      : 0,
@@ -152,12 +67,12 @@ final class MachineÀCafé {
     var changeDisponible    = 5
     var ventesTotales:Float = 0.0
     let coutDuCafé:Float
-    /// <#Description#>
     var delegate:MachineÀCaféDelegate?
     
     // lazy = créer l'instance seulement à la première utilisation
     lazy var numberFormatter = NumberFormatter()
     
+    // ====================================================
     // Le constructeur
     init(
         quantCafé:     Int,
@@ -185,6 +100,7 @@ final class MachineÀCafé {
         
     } // init
     
+    // ====================================================
     /// Un constructeur de convenance pour le programmeur paresseux.
     convenience init() {
         self.init(quantCafé:    4,
@@ -197,19 +113,20 @@ final class MachineÀCafé {
                   coutDuCafé:   2.25)
     }  // convenience init()
     
+    // ====================================================
     // Le destructeur
     deinit {
         printCouleur("\n*** Je suis le destructeur de la classe: 'MachineÀCafé' ***", .red)
         print("\t--> La machine à café a fait des ventes de \(ventesTotales) $")
     } // deinit
     
+    // ====================================================
     // Les méthodes de classe
     static func quiSuisJe() -> String {
         return "Je suis une machine à café virtuelle"
     }
     
     // Les méthodes d'instance
-    
     // ====================================================
     func infuser(_ unCafé:RecettesCafé, crème:Int = 0, sucre:Int = 0, extraFort:Bool = false) throws {
 
@@ -250,7 +167,6 @@ final class MachineÀCafé {
      - more:       rien à dire
      
      */
-
     // ====================================================
     func traiterInventaire( opération: ( _ ing:RecettesCafé, _ quant:Int) throws -> Bool, ingrédient:RecettesCafé, quantité:Int) rethrows -> Bool {
         return try opération(ingrédient, quantité)
@@ -286,7 +202,17 @@ final class MachineÀCafé {
             }
         } // guard disponibilité
 
-        inventaireMachineCafé[ingrédient]! -= quantité
+        // Détecter les ingrédients de type 'double'
+        // TODO: refactorer
+        var _ingrédient = ingrédient
+        switch ingrédient {
+        case RecettesCafé.doubleCafé: _ingrédient = .café
+        case RecettesCafé.doubleSucre: _ingrédient = .sucre
+        case RecettesCafé.doubleCrème: _ingrédient = .crème
+        default:break
+        }
+        
+        inventaireMachineCafé[_ingrédient]! -= quantité
         
         return true
     }  // retirer
@@ -294,13 +220,23 @@ final class MachineÀCafé {
     // ====================================================
     func disponibilité( ingrédient :RecettesCafé, quantité :Int) throws -> Bool  {
         let pluriel = quantité > 1 ?"s":""
-        print("\(quantité) \(ingrédient)\(pluriel), disponibilité: [\(inventaireMachineCafé[ingrédient]!)]")
-        return inventaireMachineCafé[ingrédient]! >= quantité ? true : false
+
+        // Détecter les ingrédients de type 'double'
+        // TODO: refactorer
+        var _ingrédient = ingrédient
+        switch ingrédient {
+        case RecettesCafé.doubleCafé: _ingrédient = .café
+        case RecettesCafé.doubleSucre: _ingrédient = .sucre
+        case RecettesCafé.doubleCrème: _ingrédient = .crème
+        default:break
+        }
+
+        print("\(quantité) \(_ingrédient)\(pluriel) à inventaire de [\(inventaireMachineCafé[_ingrédient]!)]")
+        return inventaireMachineCafé[_ingrédient]! >= quantité ? true : false
             
     } // disponibilité
-    // ********************************************
 
-    
+
     // ====================================================
     private func traiterLesIngrédients(café:RecettesCafé) throws
     {
@@ -308,6 +244,16 @@ final class MachineÀCafé {
         //      pour pouvoir itérer sur les ingrédients de la recette 
         //      et éliminer les "if café.contains()"
         print("Traitement des ingrédients requis pour fabriquer un [\(café)]\n")
+        //let _quantité = RecettesCafé.ingrédientsDouble.contains(<#T##member: RecettesCafé##RecettesCafé#>)
+        for _ingrédient in café {
+          //TODO:
+            // print("for ingrédient in café: ingrédient = \(_ingrédient)")
+            let _quantité = RecettesCafé.ingrédientsDouble.contains(_ingrédient) ? 2:1
+            try _ = traiterInventaire(opération: retirer, ingrédient: _ingrédient, quantité: _quantité)
+        }
+        
+        // Voici le code requis avant l'implémentation du protocole IteratorProtocol sur RecettesCafé
+        /* ********************************************************
         if café.contains(.café)
         {
             try _ = traiterInventaire(opération: retirer, ingrédient: .café, quantité: 1)
@@ -352,7 +298,7 @@ final class MachineÀCafé {
         {
             try _ = traiterInventaire(opération: retirer, ingrédient: .couvercle, quantité: 1)
         }
-
+        ******************************************************** */
         
     } // traiterLesIngrédients
     
@@ -381,10 +327,12 @@ final class MachineÀCafé {
                 ventesTotales)
     } // obtenirInventaire()
     
-    
 } // MachineÀCafé
 
+
+// ====================================================
 // Ajout de fonctionnalités à la classe 'MachineÀCafé'
+// ====================================================
 
 // MARK: - <#CustomStringConvertible#>
 // ====================================================
