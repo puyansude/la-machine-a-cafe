@@ -15,29 +15,17 @@ class ViewController: UIViewController, MachineÀCaféDelegate {
     
     @IBAction func acheterUnCafé(_ sender: Any) {
         do {
-            try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .cappuccino, crème: 2, sucre: 1)
-            print(uneMachineÀCafé.texteInventaire())
+            try uneMachineÀCafé.infuser(.cappuccino)
+            print(uneMachineÀCafé)
         }catch
         {
             print("Erreur:  Problème avec la machine à café!: error = \(error)")
         }
     }
     
-    override func   {
+    override func viewDidLoad() {
         super.viewDidLoad()
         uneMachineÀCafé.delegate = self
-        /*
-         do {
-         for _ in 0...9 {
-         try uneMachineÀCafé.fabriquerUnCafé(typeCafé: .cappuccino ,crème: 1, sucre: 0, extraFort: true)
-         } // for
-         
-         } catch
-         {
-         print("Erreur:  Problème avec la machine à café!: error = \(error)")
-         }
-         */
-        
     } // viewDidLoad
     
     func plusAccesADeLeau(sender: MachineÀCafé) {

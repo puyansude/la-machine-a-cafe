@@ -28,10 +28,11 @@ enum IngrédientsRawValue: Int {
 } // IngrédientsRawValue
 
 // ====================================================
-struct RecettesCafé :   OptionSet,
+struct RecettesCafé :
+    OptionSet,
     Hashable,
     CustomStringConvertible,
-    Sequence, IteratorProtocol
+    Sequence , IteratorProtocol
 {
     
     // ====================================================
@@ -53,13 +54,12 @@ struct RecettesCafé :   OptionSet,
     // Implémentation des protocoles 'Sequence et IteratorProtocol':
     // permet de boucler sur la structure de données.
     // mutating func next() -> T? {}
-    var remainingBits:Int
-    var bitMask = 1
-    var maxBitMaskLenght = 16 // TEMP:
+    var remainingBits:Int = 1
+    var bitMask = 0b00000001
     // ====================================================
     
-    
-    // Note: Le constructeur est requis pour la méthode next() qui retourne une instance de self.
+    // Note: Le constructeur est requis pour la méthode next() qui retourne une instance de RecettesCafé
+    // ainsi que pour l'initialisation du masque des bits à tester 'remainingBits'
     init(rawValue: Int) {
         self.rawValue = rawValue
         remainingBits = self.rawValue
@@ -67,6 +67,7 @@ struct RecettesCafé :   OptionSet,
     
     init(_ rawValue: Int) {
         self.init(rawValue: rawValue)
+        remainingBits = self.rawValue
     }
     
     // ====================================================

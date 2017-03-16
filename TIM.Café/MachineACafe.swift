@@ -137,12 +137,18 @@ final class MachineÀCafé {
             // throw ErreursDeLaMachineÀCafé.plusAccèsÀUneSourceDEau
         }
         
-        // Exception passée à 'infuser() throws'
-        try traiterLesIngrédients(café:unCafé)
-        
-        // exception ne sera pas passé à 'infuser() throws'
-        // do { try traiterLesIngrédients(café:unCafé) } catch { }
-        
+        // Note: Dans un monde idéal, il faudrait tester la disponibilité de tous les ingrédients
+        //       avant d'infuser le café.
+        //       L'idée ici est de tester des concepts avancés de swift comme par exemple,
+        //       générer une exception lorsque qu'il manque d'un ingrédient lors de son utilisation.
+
+        // Note: Itération possible sur 'unCafé' grace à l'implémentation des protocoles
+        //       'Sequence et IteratorProtocol' sur 'RecettesCafé'
+        for _ingrédient in unCafé {
+            let _quantité = RecettesCafé.ingrédientsDouble.contains(_ingrédient) ? 2:1
+            // Exception passée à 'infuser() throws'
+            try _ = traiterInventaire(opération: retirer, ingrédient: _ingrédient, quantité: _quantité)
+        }
         
         ventesTotales += coutDuCafé
         print("---> Un \(unCafé) est servi...")
@@ -236,7 +242,7 @@ final class MachineÀCafé {
             
     } // disponibilité
 
-
+/*
     // ====================================================
     private func traiterLesIngrédients(café:RecettesCafé) throws
     {
@@ -253,7 +259,7 @@ final class MachineÀCafé {
         }
         
         // Voici le code requis avant l'implémentation du protocole IteratorProtocol sur RecettesCafé
-        /* ********************************************************
+        // ********************************************************
         if café.contains(.café)
         {
             try _ = traiterInventaire(opération: retirer, ingrédient: .café, quantité: 1)
@@ -298,10 +304,10 @@ final class MachineÀCafé {
         {
             try _ = traiterInventaire(opération: retirer, ingrédient: .couvercle, quantité: 1)
         }
-        ******************************************************** */
+        // ********************************************************
         
     } // traiterLesIngrédients
-    
+ */
     
     // ====================================================
     /**
