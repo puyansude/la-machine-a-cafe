@@ -10,3 +10,5 @@ Une symphatique machine à café virtuelle permettant d'expérimenter avec les c
  *  lazy, n-tuplet, fonction variadique,
  *  paramètre par défaut d"une fonction,
  * passer une fonction en paramètre à un fonction
+ * alias
+ * Rendre un objet itérable: les protocoles 'Sequence' et 'IteratorProtocol'
