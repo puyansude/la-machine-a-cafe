@@ -11,13 +11,14 @@ import Foundation
 class Application {
 
     let uneMachineÀCafé = MachineÀCafé()
-    
+    let quitterMenu = "9"
+
     init() {
-        printCouleur("### Je suis le constructeur de la classe 'Application' ###", .green)
+        Boite.printCouleur("### Je suis le constructeur de la classe 'Application' ###", .green)
     }
     
     func menu() -> String {
-        
+
         Boite.entete("Bienvenue à la machine à café")
         Boite.afficher(" 1.Café maison: 1 crème, 1 sucre")
         Boite.afficher(" 2.Espresso")
@@ -27,13 +28,12 @@ class Application {
         Boite.afficher(" 6.Affogato")
         Boite.tracerLigne(position: .séparateur)
         Boite.afficher(" 8.Inventaire de la machine")
-        Boite.afficher(" 9.Quitter")
+        Boite.afficher(" \(quitterMenu).Quitter")
         Boite.tracerLigne(position: .bas)
         
-        print("Votre choix?")
-        let response = readLine()!
-        print("response = \(response)")
-        return response
+        // let response = Boite.pause("Votre choix?")
+        // print("response = \(response)")
+        return Boite.pause("Votre choix?")
     }
     
     func loop() {
@@ -50,17 +50,17 @@ class Application {
                 case "6": try uneMachineÀCafé.infuser(.affogato)
                     
                 case "8": print(uneMachineÀCafé)
-                case "9": break  // Pour de pas obtenir le msg de default
+                case quitterMenu: break  // Pour de pas obtenir le msg de default
                     
-                default: printCouleur("Erreur: Choix invalide", .red)
+                default: Boite.printCouleur("Erreur: Choix invalide", .red)
                 }
             } catch
             {
-                printCouleur("Erreur de la machine à café: \(error)", .red)
+                Boite.printCouleur("Erreur de la machine à café: \(error)", .red)
                 break // Va sortir du 'while'
             }	
             
-        } while choix != "9"
+        } while choix != quitterMenu
         
     } // loop()
     

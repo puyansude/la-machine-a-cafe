@@ -12,3 +12,4 @@ Une symphatique machine à café virtuelle permettant d'expérimenter avec les c
  * passer une fonction en paramètre à un fonction,
  * typealias,
  * rendre un objet itérable: les protocoles 'Sequence' et 'IteratorProtocol'
+ * #if DEBUG, #endif

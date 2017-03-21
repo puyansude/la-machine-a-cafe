@@ -83,7 +83,7 @@ final class MachineÀCafé {
         quantCannelle: Int,
         quantVanille:  Int,
         coutDuCafé:    Float){
-        printCouleur("### Je suis le constructeur de la classe 'MachineÀCafé' ###\n", .green)
+        Boite.printCouleur("### Je suis le constructeur de la classe 'MachineÀCafé' ###\n", .green)
         
         // Il est possible d'indicer le dictionnaire avec RecettesCafé parce que RecettesCafé est conforme au protocole 'Hashable'
         inventaireMachineCafé[.café]!       = quantCafé
@@ -116,7 +116,7 @@ final class MachineÀCafé {
     // ====================================================
     // Le destructeur
     deinit {
-        printCouleur("\n*** Je suis le destructeur de la classe: 'MachineÀCafé' ***", .red)
+        Boite.printCouleur("\n*** Je suis le destructeur de la classe: 'MachineÀCafé' ***", .red)
         print("\t--> La machine à café a fait des ventes de \(ventesTotales) $")
     } // deinit
     
@@ -182,7 +182,7 @@ final class MachineÀCafé {
     // ====================================================
     /// Permet d'ajouter une quantité à un ingrédient de la machine à café.
     func ajouter( ingrédient :RecettesCafé, quantité :Int) throws -> Bool  {
-        print("Inventaire: ajouter")
+        printDebug("Inventaire: ajouter")
         // guard ... else { throw ErreursDeLaMachineÀCafé.impossibleAjouterInventaire }
         return true
     } // ajouter
@@ -190,7 +190,7 @@ final class MachineÀCafé {
     
     // ====================================================
     func retirer( ingrédient :RecettesCafé, quantité :Int) throws -> Bool  {
-        print("Inventaire -> retirer: ", terminator: "")
+        printDebug("Inventaire -> retirer: ", terminator: "")
         
         guard try disponibilité(ingrédient: ingrédient, quantité: quantité) else {
 
@@ -237,7 +237,7 @@ final class MachineÀCafé {
         default:break
         }
 
-        print("\(quantité) \(_ingrédient)\(pluriel) à inventaire de [\(inventaireMachineCafé[_ingrédient]!)]")
+        printDebug("\(quantité) \(_ingrédient)\(pluriel) à inventaire de [\(inventaireMachineCafé[_ingrédient]!)]")
         return inventaireMachineCafé[_ingrédient]! >= quantité ? true : false
             
     } // disponibilité

@@ -31,22 +31,9 @@ extension Int {
     } // toBinWithPad
 } //extension Int
 
-enum ANSIColors: String {
-    case black = "\u{001B}[0;30m"
-    case red = "\u{001B}[1;31m"
-    case green = "\u{001B}[1;32m"
-    case yellow = "\u{001B}[0;33m"
-    case blue = "\u{001B}[0;34m"
-    case magenta = "\u{001B}[0;35m"
-    case cyan = "\u{001B}[0;36m"
-    case white = "\u{001B}[0;37m"
-}
-
-let black = "\u{001B}[0;30m"
-let red = "\u{001B}[1;31m"
-let green = "\u{001B}[0;32m"
-
-func printCouleur(_ texte:String, _ couleur:ANSIColors) {
-    print(couleur.rawValue, texte, ANSIColors.black.rawValue)
-
+// Disable print for production.
+func printDebug(_ items: Any..., separator: String = " ", terminator: String = "\n") {
+    #if DEBUG
+        Swift.print(items[0], separator:separator, terminator: terminator)
+    #endif
 }

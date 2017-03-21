@@ -130,10 +130,10 @@ struct RecettesCafé :
             defer { bitMask = bitMask &* 2 }   // permuter le masque vers la gauche à la sortie de la méthode
             if remainingBits & bitMask != 0 { // Tester le bit courant
                 remainingBits = remainingBits & ~bitMask // Soustraire le bit courant aux bits à tester
-                print("\n---> Itérateur de RecettesCafé: masque des ingrédients = \(rawValue.toBinWithPad())")
-                print("---> Itérateur de RecettesCafé: masque d'intersection  = \(bitMask.toBinWithPad())")
-                print("---> Itérateur de RecettesCafé: bits restants          = \(remainingBits.toBinWithPad())")
-                print("---> Itérateur de RecettesCafé: ingrédient trouvé      = \(RecettesCafé(rawValue: bitMask))")
+                printDebug("\n---> Itérateur de RecettesCafé: masque des ingrédients = \(rawValue.toBinWithPad())")
+                printDebug("---> Itérateur de RecettesCafé: masque d'intersection  = \(bitMask.toBinWithPad())")
+                printDebug("---> Itérateur de RecettesCafé: bits restants          = \(remainingBits.toBinWithPad())")
+                printDebug("---> Itérateur de RecettesCafé: ingrédient trouvé      = \(RecettesCafé(rawValue: bitMask))")
                 
                 return RecettesCafé(rawValue: bitMask)  // retourner l'ingrédient courant
             }

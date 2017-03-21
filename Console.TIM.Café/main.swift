@@ -17,6 +17,7 @@ class MonApplication: Application, MachineÀCaféDelegate {
     override init(){
         super.init()
         uneMachineÀCafé.delegate = self
+        Boite.cls()
     }
 }
 
