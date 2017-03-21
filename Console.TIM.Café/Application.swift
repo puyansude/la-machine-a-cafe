@@ -12,34 +12,37 @@ class Application {
 
     let uneMachineÀCafé = MachineÀCafé()
     let quitterMenu = "9"
-
+    let _menu = Boite(titre: "Un titre", ligne: 0, colonne: 0)
+    
     init() {
+        
         Boite.printCouleur("### Je suis le constructeur de la classe 'Application' ###", .green)
     }
     
-    func menu() -> String {
-
-        Boite.entete("Bienvenue à la machine à café")
-        Boite.afficher(" 1.Café maison: 1 crème, 1 sucre")
-        Boite.afficher(" 2.Espresso")
-        Boite.afficher(" 3.Cappuccino")
-        Boite.afficher(" 4.Latte")
-        Boite.afficher(" 5.Mocha")
-        Boite.afficher(" 6.Affogato")
-        Boite.tracerLigne(position: .séparateur)
-        Boite.afficher(" 8.Inventaire de la machine")
-        Boite.afficher(" \(quitterMenu).Quitter")
-        Boite.tracerLigne(position: .bas)
-        
-        // let response = Boite.pause("Votre choix?")
-        // print("response = \(response)")
-        return Boite.pause("Votre choix?")
-    }
+    func afficherMenu() {
+        _menu.entete("Bienvenue à la machine à café")
+        _menu.afficher(" 1.Café maison: 1 crème, 1 sucre")
+        _menu.afficher(" 2.Espresso")
+        _menu.afficher(" 3.Cappuccino")
+        _menu.afficher(" 4.Latte")
+        _menu.afficher(" 5.Mocha")
+        _menu.afficher(" 6.Affogato")
+        _menu.tracerLigne(position: .séparateur)
+        _menu.afficher(" 8.Inventaire de la machine")
+        _menu.afficher(" \(quitterMenu).Quitter")
+        _menu.tracerLigne(position: .bas)
+    } // afficherMenu()
     
     func loop() {
         var choix = ""
         repeat  {
-            choix = menu()
+            #if !DEBUG
+                Boite.cls()
+            #endif
+
+            afficherMenu()
+            print(uneMachineÀCafé)
+            choix = Boite.pause("Votre choix?")
             do {
                 switch choix {
                 case "1": try uneMachineÀCafé.infuser(.caféMaison, sucre: 1)

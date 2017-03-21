@@ -4,7 +4,7 @@ Exemple d'utilisation des concepts avancés de swift 3
 Une symphatique machine à café virtuelle permettant d'expérimenter avec les concepts suivants de swift:
 
  * class, extension, enum, struct, OptionSet, rawValue,
- * init, deinit, convenience init,
+ * init, deinit, convenience init, mutating function,
  * do/try/catch/error, try?, guard, break, defer,
  * protocol, delegate, CustomStringConvertible, Hashable,
  * lazy, n-tuplet, fonction variadique,
@@ -13,3 +13,4 @@ Une symphatique machine à café virtuelle permettant d'expérimenter avec les c
  * typealias,
  * rendre un objet itérable: les protocoles 'Sequence' et 'IteratorProtocol'
  * #if DEBUG, #endif
+ * numberFormatter, numberFormatter.numberStyle = .currency

@@ -53,7 +53,24 @@ class Boite {
     } // enum caractèresPourTracerLaBoite
     // FIN =================================================
 
+    // Les propriétés de la classe
+    var ligne:Int?   // si pas 'nil', sert à positionner la boite à l'écran
+    var colonne:Int? // si pas 'nil', sert à positionner la boite à l'écran
+    var largeur:Int = largeurParDéfaut
+    var hauteur:Int?
+    
+    // Contructeur par defaut - pas de positionnement de la boite.
+    init() {
+    }
 
+    init(titre:String,
+         ligne:Int? = nil,
+         colonne:Int? = nil,
+         largeur:Int = largeurParDéfaut,
+         hauteur:Int? = nil) {
+        
+    }
+    
     // =====================================================
     /// <#Description#>
     ///
@@ -63,7 +80,7 @@ class Boite {
     ///   - couleur: <#couleur description#>
     ///   - gras: <#gras description#>
     ///   - longueur: <#longueur description#>
-    static func entete(_ titre: String, couleur: String = "", gras:Bool = false, longueur:Int = largeurParDéfaut) {
+    func entete(_ titre: String, couleur: String = "", gras:Bool = false, longueur:Int = largeurParDéfaut) {
         
         tracerLigne(longueur: longueur, position: .haut)
         afficher(titre, centré: true)
@@ -92,7 +109,7 @@ class Boite {
      /// - Parameters:
      ///   - longueur: <#longueur description#>
      ///   - position: <#position description#>
-     static func tracerLigne(longueur:Int = largeurParDéfaut, position: PositionLigne) {
+     func tracerLigne(longueur:Int = largeurParDéfaut, position: PositionLigne) {
         var coinGauche:String
         var coinDroit:String
         var carHorizontal = caractèresPourTracerLaBoite.horizontal.rawValue
@@ -148,7 +165,7 @@ class Boite {
     ///   - gras: <#gras description#>
     ///   - centré: <#centré description#>
     ///   - longueur: <#longueur description#>
-    static func afficher( _ chaines: String ... , couleur: String = "", gras:Bool = false, centré:Bool = false, longueur:Int = largeurParDéfaut) {
+    func afficher( _ chaines: String ... , couleur: String = "", gras:Bool = false, centré:Bool = false, longueur:Int = largeurParDéfaut) {
     
         var lesChaines = ""
         var concaténation = caractèresPourTracerLaBoite.vertical.rawValue
