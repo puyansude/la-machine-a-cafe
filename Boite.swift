@@ -7,7 +7,8 @@
 //  Copyright © 2017 Alain. All rights reserved.
 //
 // ====================================================
-
+// Branche m-a-j-Boite
+// Ajout de fonctionnalités de positionnement dans la boite
 import Foundation
 /*
  ┌─────────┐
